@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'bootstrap4',
     'crispy_forms',
-    'core',
+    'tutor_finder.core',
     'tutor_finder',
 ]
 
