@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 import os
 from decouple import config
-#import dj_database_url
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,6 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = os.environ['SECRET_KEY']  <-- Use this if you store your secret keys as an environment variable (EX. export SECRET_KEY="mYsEcReTkEy")
 #SDDTF_USER = os.environ['SDDTF_USER']  #<-- Similarly, use this if you store your SDDTF/Mongo username as an environment variable
 #SDDTF_PASS = os.environ['SDDTF_PASS']  #<-- Same thing for password
+SECRET_KEY = config('SECRET_KEY')
 SDDTF_USER = config('SDDTF_USER')
 SDDTF_PASS = config('SDDTF_PASS')
 
@@ -42,6 +43,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Application definition
 
 INSTALLED_APPS = [
+    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -100,7 +102,12 @@ DATABASES = {
     }
 }
 
-# DATABASES['default'] = dj_database_url.config()
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

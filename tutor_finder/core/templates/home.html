@@ -2,17 +2,17 @@
 
 {% block content %}
   <h2>Homepage</h2>
-  <p>Welcome to GymTracker,
+  <p>Welcome to Tutor Finder,
   {% if user.is_authenticated %}
   {{ user.username }}!
   <p>
-  Click on the Log Workout tab to begin tracking your workouts.
+  Click on the Find Tutors tab to begin looking for tutors.
   </p>
   {% else %}
   visitor!
   <p>
-  Create an account or login to start tracking workouts.
-  </p>
+  Create an account or login to get started.
+  </p>  
   {% endif %}</p>
   <p>
     <strong>Total users registered: </strong> {{ count }}
