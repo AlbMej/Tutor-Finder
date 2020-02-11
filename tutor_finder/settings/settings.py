@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret! #### Moved secret keys to a local file ####
 ####################################################################
 
-# SECRET_KEY = os.environ['SECRET_KEY']  <-- Use this if you store your secret keys as an environment variable (EX. export SECRET_KEY="mYsEcReTkEy")
-#SDDTF_USER = os.environ['SDDTF_USER']  #<-- Similarly, use this if you store your SDDTF/Mongo username as an environment variable
-#SDDTF_PASS = os.environ['SDDTF_PASS']  #<-- Same thing for password
+# SECRET_KEY = os.environ['SECRET_KEY']  #<-- Use this if you store your secret keys as an environment variable (EX. export SECRET_KEY="mYsEcReTkEy")
+# SDDTF_USER = os.environ['SDDTF_USER']  #<-- Similarly, use this if you store your SDDTF/Mongo username as an environment variable
+# SDDTF_PASS = os.environ['SDDTF_PASS']  #<-- Same thing for password
 SECRET_KEY = config('SECRET_KEY')
 SDDTF_USER = config('SDDTF_USER')
 SDDTF_PASS = config('SDDTF_PASS')
@@ -91,16 +91,26 @@ WSGI_APPLICATION = 'tutor_finder.wsgi.application'
 ###################################################################
 #          Moved database credentials to a local file             #
 ###################################################################
-
-DATABASES = {
+#f'mongodb+srv://{SDDTF_USER}:{SDDTF_PASS}@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
+DATABASES = { 
     'default': {
         'ENGINE'  : 'djongo',
         'NAME'    : 'SDDTF', 
-        'HOST'    : f'mongodb+srv://{SDDTF_USER}:{SDDTF_PASS}@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
+        'HOST'    : 'mongodb+srv://' + SDDTF_USER + ':' + SDDTF_PASS + '@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
+        # 'HOST': '127.0.0.1',
         'USER'    : SDDTF_USER,
         'PASSWORD': SDDTF_PASS,
+        # 'AUTH_SOURCE': 'SDDTF',
+        # 'AUTH_MECHANISM': 'SCRAM-SHA-1'
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'database_name', 
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
