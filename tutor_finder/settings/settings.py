@@ -13,6 +13,8 @@ import os
 from decouple import config
 import dj_database_url
 
+""" BASE SETTINGS """
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,18 +22,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 ####################################################################
-# SECURITY WARNING: keep the secret key used in production secret! #### Moved secret keys to a local file ####
+# SECURITY WARNING: keep the secret key used in production secret! #### Moved secret keys to environment variable ####
 ####################################################################
 
 # SECRET_KEY = os.environ['SECRET_KEY']  #<-- Use this if you store your secret keys as an environment variable (EX. export SECRET_KEY="mYsEcReTkEy")
-# SDDTF_USER = os.environ['SDDTF_USER']  #<-- Similarly, use this if you store your SDDTF/Mongo username as an environment variable
-# SDDTF_PASS = os.environ['SDDTF_PASS']  #<-- Same thing for password
 SECRET_KEY = config('SECRET_KEY')
-SDDTF_USER = config('SDDTF_USER')
-SDDTF_PASS = config('SDDTF_PASS')
 
 ###################################################################
-# SECURITY WARNING: don't run with debug turned on in production! #
+# SECURITY WARNING: don't run with debug turned on in production! #### People kept committing local credentials file by accident ####
 ###################################################################
 DEBUG = False
 
@@ -90,28 +88,15 @@ WSGI_APPLICATION = 'tutor_finder.wsgi.application'
 ###################################################################
 #          Moved database credentials to a local file             #
 ###################################################################
-#f'mongodb+srv://{SDDTF_USER}:{SDDTF_PASS}@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
-# DATABASES = { 
-#     'default': {
-#         'ENGINE'  : 'djongo',
-#         'NAME'    : 'SDDTF', 
-#         'HOST'    : 'mongodb+srv://' + SDDTF_USER + ':' + SDDTF_PASS + '@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
-#         # 'HOST': '127.0.0.1',
-#         'USER'    : SDDTF_USER,
-#         'PASSWORD': SDDTF_PASS,
-#         # 'AUTH_SOURCE': 'SDDTF',
-#         # 'AUTH_MECHANISM': 'SCRAM-SHA-1'
-#     }
-# }
 
-DATABASES = { # DBS Doesn't work locally for some reason. Use this as a placehold for local testing. 
+DATABASES = { # MongoDB Atlas doesn't work locally (Think bc of free version). Use this for local testing. 
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'mydatabase',
     }
 }
 
-# DATABASES = {
+# DATABASES = { 
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #         'NAME': 'postgres',
