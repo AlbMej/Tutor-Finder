@@ -3,11 +3,12 @@ from django.contrib.auth.models import User
 
 from django.views.generic import View
 from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 from django.views.generic import FormView, TemplateView
 from django.contrib.auth.decorators import login_required
+from .forms import CustomFieldForm
 
 # Create your views here.
-
 def home(request):
     count = User.objects.count()
     return render(request, 'home.html', {
@@ -29,10 +30,8 @@ def signup(request):
 class SuccessView(TemplateView):
     template_name = 'success.html'
 
-
 class DeniedView(TemplateView):
     template_name = 'denied.html'
-
 
 class PreapprovedView(TemplateView):
     template_name = 'preapproved.html'
@@ -45,11 +44,11 @@ def submit_form(request):
         if form.is_valid():
             form.save()
             amount = form.cleaned_data['amount_required']
-            years = form.cleaned_data['years_in_business']
+            years = form.cleaned_data['years_in_college']
 
-            if amount > 50000 and years < 1:
+            if amount > 25 and years < 1:
                 return redirect("denied")
-            elif amount < 50000 and years >= 1:
+            elif amount < 25 and years >= 1:
                 return redirect("preapproved")
             else:
                 return redirect("success")

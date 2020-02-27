@@ -43,8 +43,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Application definition
 
 INSTALLED_APPS = [
-    # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
+    'tutor_finder.core',
+    'tutor_finder',
+    'django.contrib.admin',     # Uncomment line to enable the admin:
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -54,8 +55,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'bootstrap4',
     'crispy_forms',
-    'tutor_finder.core',
-    'tutor_finder',
 ]
 
 MIDDLEWARE = [
@@ -92,30 +91,33 @@ WSGI_APPLICATION = 'tutor_finder.wsgi.application'
 #          Moved database credentials to a local file             #
 ###################################################################
 #f'mongodb+srv://{SDDTF_USER}:{SDDTF_PASS}@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
-DATABASES = { 
+# DATABASES = { 
+#     'default': {
+#         'ENGINE'  : 'djongo',
+#         'NAME'    : 'SDDTF', 
+#         'HOST'    : 'mongodb+srv://' + SDDTF_USER + ':' + SDDTF_PASS + '@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
+#         # 'HOST': '127.0.0.1',
+#         'USER'    : SDDTF_USER,
+#         'PASSWORD': SDDTF_PASS,
+#         # 'AUTH_SOURCE': 'SDDTF',
+#         # 'AUTH_MECHANISM': 'SCRAM-SHA-1'
+#     }
+# }
+
+DATABASES = { # DBS Doesn't work locally for some reason. Use this as a placehold for local testing. 
     'default': {
-        'ENGINE'  : 'djongo',
-        'NAME'    : 'SDDTF', 
-        'HOST'    : 'mongodb+srv://' + SDDTF_USER + ':' + SDDTF_PASS + '@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
-        # 'HOST': '127.0.0.1',
-        'USER'    : SDDTF_USER,
-        'PASSWORD': SDDTF_PASS,
-        # 'AUTH_SOURCE': 'SDDTF',
-        # 'AUTH_MECHANISM': 'SCRAM-SHA-1'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': 'database_name', 
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': 'mydatabase',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'HOST': 'db',
+#         'PORT': 5432,
 #     }
 # }
 
