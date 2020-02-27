@@ -12,7 +12,7 @@ DATABASES = {
     'default': {
         'ENGINE'  : 'djongo',
         'NAME'    : 'SDDTF', 
-        'HOST'    : f'mongodb+srv://{SDDTF_USER}:{SDDTF_PASS}@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
+        'HOST'    : 'mongodb+srv://' + SDDTF_USER + ':' + SDDTF_PASS + '@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
         'USER'    : SDDTF_USER,
         'PASSWORD': SDDTF_PASS,
     }
