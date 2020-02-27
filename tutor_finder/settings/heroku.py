@@ -7,16 +7,18 @@ ADMINS = [('Alberto Mejia', 'albertomejia295@gmail.com')]
 # SDDTF_PASS = os.environ['SDDTF_PASS']  #<-- Same thing for password
 SDDTF_USER = config('SDDTF_USER')
 SDDTF_PASS = config('SDDTF_PASS')
+STATUS_VAR = config('STATUS_VAR')
 
-# DATABASES = { 
-#     'default': {
-#         'ENGINE'  : 'djongo',
-#         'NAME'    : 'SDDTF', 
-#         'HOST'    : 'mongodb+srv://' + SDDTF_USER + ':' + SDDTF_PASS + '@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
-#         'USER'    : SDDTF_USER,
-#         'PASSWORD': SDDTF_PASS,
-#     }
-# }
+if STATUS_VAR == 'production':
+    DATABASES = { 
+        'default': {
+            'ENGINE'  : 'djongo',
+            'NAME'    : 'SDDTF', 
+            'HOST'    : 'mongodb+srv://' + SDDTF_USER + ':' + SDDTF_PASS + '@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
+            'USER'    : SDDTF_USER,
+            'PASSWORD': SDDTF_PASS,
+        }
+    }
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
