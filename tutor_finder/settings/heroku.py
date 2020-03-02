@@ -8,15 +8,15 @@ ADMINS = [('Alberto Mejia', 'albertomejia295@gmail.com')]
 SDDTF_USER = config('SDDTF_USER')
 SDDTF_PASS = config('SDDTF_PASS')
 
-DATABASES = { 
-    'default': {
-        'ENGINE'  : 'djongo',
-        'NAME'    : 'SDDTF', 
-        'HOST'    : 'mongodb+srv://' + SDDTF_USER + ':' + SDDTF_PASS + '@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
-        'USER'    : SDDTF_USER,
-        'PASSWORD': SDDTF_PASS,
-    }
-}
+# DATABASES = { 
+#     'default': {
+#         'ENGINE'  : 'djongo',
+#         'NAME'    : 'SDDTF', 
+#         'HOST'    : 'mongodb+srv://' + SDDTF_USER + ':' + SDDTF_PASS + '@tutor-finder-dbs-ayohv.mongodb.net/test?retryWrites=true&w=majority',
+#         'USER'    : SDDTF_USER,
+#         'PASSWORD': SDDTF_PASS,
+#     }
+# }
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
