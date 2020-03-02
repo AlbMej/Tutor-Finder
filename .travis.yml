@@ -1,0 +1,29 @@
+branches:
+  only:
+  - master
+services: mongodb
+language: python
+python:
+  - "2.7" #lowest version of python supported by Django
+  - "3.8" #highest python version supported by Django
+  - "pypy" #pypy is for testing, runs way faster than pyC
+env:
+  - DJANGO="Django>=1.11,<2.0" #older django
+  - DJANGO="Django>=2.0,<3.0" #newer django
+
+#exclusion matrix is necassary so we dont try to build django 1.1 with python 3
+
+jobs:
+  exclude:
+  - python: "2.7"
+    env: DJANGO="Django>=2.0,<3.0"
+  - python: "pypy"
+    env: DJANGO="Django>=2.0,<3.0" #unsure of this, read on stackexhange that this was needed
+
+install:
+  - pip install -q $DJANGO
+  - pip install pylint
+
+#when tests are developed, they should be placed here
+notifications:
+  slack: sddspaghetticode:NyaUgvSVibaHRlBFifCvP6Lw
