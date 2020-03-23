@@ -27,3 +27,19 @@ class UserInfo(models.Model):
     other = models.CharField(max_length=64)
 
     agree = models.BooleanField()  #required=True
+
+class School(models.Model):
+    name = models.CharField(max_length=64)
+    city = models.CharField(max_length=64)
+    state = models.CharField(max_length=32)
+    zip_code = models.CharField(max_length=32)
+
+class Course(models.Model):
+    name = models.CharField(max_length=64)
+    school_id = models.ForeignKey(School, on_delete=models.CASCADE)
+    department = models.CharField(max_length=64)
+    course_number = models.CharField(max_length=32)
+
+class Tutor(models.Model):
+    acc_id = models.ForeignKey(UserInfo, on_delete=models.CASCADE)
+    course_id = models.ForeignKey(Course,on_delete=models.CASCADE)
