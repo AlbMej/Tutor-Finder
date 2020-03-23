@@ -1,12 +1,18 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-
+from django.db.models import Q
 from django.views.generic import View
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from django.views.generic import FormView, TemplateView
+from django.views.generic import FormView, TemplateView, ListView
 from django.contrib.auth.decorators import login_required
 from .forms import CustomFieldForm
+from .models import Tutor
+
+
+
+
+
 
 # Create your views here.
 def home(request):
@@ -59,3 +65,17 @@ def submit_form(request):
     return render(request, "form.html", {
         'form': CustomFieldForm()
     })
+
+
+class SearchView(TemplateView):
+    template_name = 'tutor_search.html'
+    
+class SearchResultsView(ListView):
+    model = Tutor
+    template_name = 'tutor_search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Tutor.objects.filter(Q(name__icontains=query) | Q(price__icontains=query))
+
+        return object_list

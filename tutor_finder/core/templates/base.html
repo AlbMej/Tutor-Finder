@@ -35,6 +35,7 @@
               <a class="nav-link" href="{% url 'tutorform' %}">Tutor Page</a>
             </li>
           {% endif %}
+
         </ul>
         {% if user.is_authenticated %}
           <ul class="navbar-nav">
@@ -55,6 +56,9 @@
             <a href="{% url 'signup' %}" class="btn btn-primary ml-2">Sign up</a>
           </form>
         {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tutor_search' %}">Tutor Search</a>
+          </li>
       </div>
     </div>
   </nav>

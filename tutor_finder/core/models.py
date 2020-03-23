@@ -27,3 +27,12 @@ class UserInfo(models.Model):
     other = models.CharField(max_length=64)
 
     agree = models.BooleanField()  #required=True
+
+class Tutor(models.Model):
+    name = models.CharField(max_length=225)
+    price = models.IntegerField()
+    availability = []
+
+
+    def __str__(self):
+        return self.name
