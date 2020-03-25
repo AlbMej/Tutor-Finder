@@ -63,6 +63,7 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+mydatabase
 
 # Flask stuff:
 instance/
@@ -137,3 +138,6 @@ mydatabase
 # vscode
  .vscode/ 
 .vscode/settings.json
+
+.DS_Store
+tutor_finder/settings/staticfiles/
