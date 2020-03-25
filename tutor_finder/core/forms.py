@@ -3,6 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, Field
 from django.core.exceptions import ValidationError
 from tutor_finder.core.models import UserInfo
+import datetime
 
 class InfoFieldForm(forms.ModelForm):
     class Meta:
@@ -74,3 +75,47 @@ class CustomFieldForm(InfoFieldForm):
             CustomCheckbox('agree'),
             Submit('submit', 'Submit')
         )
+
+
+class TutorSearchForm(forms.Form):
+
+    
+    class_search = forms.CharField(
+        label='searchbar',
+        widget=forms.TextInput(attrs={'placeholder' : 'Search for Tutor by Class!'}))
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'class_search',
+            Submit('submit','Search')
+        )
+
+
+
+
+class TutorSearchFilterForm(TutorSearchForm):
+    
+    time = forms.DateTimeField(initial=datetime.datetime.today,required=False)
+    max_price = forms.DecimalField(required=False)
+    lowest_rating = forms.DecimalField(initial=0.0,required=False)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'class_search',
+            Row(
+                Column('time',css_class='form-group col-md-6 mb-0'),
+                css_class = 'form_row'
+            ),
+            Row(
+                Column('max_price',css_class='form-group col-md-6 mb-0'),
+                css_class = 'form_row'
+            ),
+            Row(
+                Column('lowest_rating',css_class='form-group col-md-6 mb-0'),
+                css_class = 'form_row'
+            ),
+            Submit('submit','Apply Filters')
+        )
+    

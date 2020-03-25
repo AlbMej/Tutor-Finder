@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.views.generic import FormView, TemplateView, ListView
 from django.contrib.auth.decorators import login_required
-from .forms import CustomFieldForm
+from .forms import CustomFieldForm, TutorSearchForm, TutorSearchFilterForm
 from .models import Tutor
 
 
@@ -69,6 +69,16 @@ def submit_form(request):
 
 class SearchView(TemplateView):
     template_name = 'tutor_search.html'
+
+
+    def search_form(request):
+        form = TutorSearchForm(request.POST)
+        if request.method == 'POST':
+            if form.is_valid():
+                form = TutorSearchFilterForm(request.POST)
+        else:
+            form = TutorSearchForm()
+        return render( request, 'tutor_search.html',{'form': form})
     
 class SearchResultsView(ListView):
     model = Tutor
@@ -79,3 +89,5 @@ class SearchResultsView(ListView):
         object_list = Tutor.objects.filter(Q(name__icontains=query) | Q(price__icontains=query))
 
         return object_list
+    # def get_name( request ):
+    #     if request.method == 'GET' :

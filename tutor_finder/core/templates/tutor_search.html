@@ -1,5 +1,10 @@
-<h1>Search for a Tutor!</h1>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
-<form action="{% url 'tutor_search_results' %}" method="get">
-  <input name="q" type="text" placeholder="Search...">
-</form>
+
+{% block content %}
+  <h1>Search for a Tutor!</h1>
+
+  {% crispy form %}
+  
+{% endblock %}
