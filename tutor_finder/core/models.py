@@ -36,3 +36,15 @@ class Tutor(models.Model):
 
     def __str__(self):
         return self.name
+      
+class School(models.Model):
+    name = models.CharField(max_length=64)
+    city = models.CharField(max_length=64)
+    state = models.CharField(max_length=32)
+    zip_code = models.CharField(max_length=32)
+
+class Course(models.Model):
+    name = models.CharField(max_length=64)
+    school_id = models.ForeignKey(School, on_delete=models.CASCADE)
+    department = models.CharField(max_length=64)
+    course_number = models.CharField(max_length=32)
