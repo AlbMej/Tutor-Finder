@@ -9,9 +9,9 @@ from django.urls import reverse
 from django.views.generic import FormView, TemplateView, ListView
 from django.contrib.auth.decorators import login_required
 from .forms import CustomFieldForm, TutorSearchForm, TutorSearchFilterForm
-from .models import Tutor
+from .models import Tutor, School, Course
 from urllib.parse import urlencode
-
+import datetime
 
 
 
@@ -93,23 +93,29 @@ class SearchView(TemplateView):
     
 class SearchResultsView(ListView):
     
-    def search(request):
-        if request.method=='POST':
-            ...
-        else:
-            ...
+    def tut_search(query_set):
+        class_search = query_set.cleaned_data['class_search']
+        time_av = query_set.cleaned_data['time']
+        max_price = query_set.cleaned_data['max_price']
+        lowest_rating = query_set.cleaned_data['lowest_rating']
+        # this is where we query the db and return the list of tutor objects
+        # we can figure out how to link the tutor results to actual pages later
+        # prolly through some url nonsense, or a view/redirect href html thing
+        
     
     def search_results(request):
+        tutors = None
         form = TutorSearchFilterForm(request.POST)
         html = 'tutor_search_results.html'
         if request.method == 'POST':
             if form.is_valid():
-                form = TutorSearchFilterForm(request.POST)
-                html = 'tutor_search_results.html'
+                tutors = SearchResultsView.tut_search(form)
         else:
             form = TutorSearchFilterForm(request.GET)
-        return render( request, html ,{'form': form})
+            tutors = SearchResultsView.tut_search(form)
+            
+        return render( request, html ,{
+            'form': form
+            })
 
-    def get_queryset(self):
-        query = self.request.Get.get('q')
-        
+    
