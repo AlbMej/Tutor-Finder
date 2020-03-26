@@ -28,14 +28,7 @@ class UserInfo(models.Model):
 
     agree = models.BooleanField()  #required=True
 
-class Tutor(models.Model):
-    name = models.CharField(max_length=225)
-    price = models.IntegerField()
-    availability = []
 
-
-    def __str__(self):
-        return self.name
       
 class School(models.Model):
     name = models.CharField(max_length=64)
@@ -48,3 +41,14 @@ class Course(models.Model):
     school_id = models.ForeignKey(School, on_delete=models.CASCADE)
     department = models.CharField(max_length=64)
     course_number = models.CharField(max_length=32)
+
+class Tutor(models.Model):
+    name = models.CharField(max_length=225)
+    price = models.IntegerField()
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, default = None)
+    school = models.ForeignKey(School, on_delete=models.CASCADE, default = None)
+    availability = []
+
+
+    def __str__(self):
+        return self.name

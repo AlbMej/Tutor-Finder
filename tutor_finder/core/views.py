@@ -93,15 +93,21 @@ class SearchView(TemplateView):
     
 class SearchResultsView(ListView):
     
-    def tut_search(query_set):
+    def tut_search(query_set,method):
         class_search = query_set.cleaned_data['class_search']
-        time_av = query_set.cleaned_data['time']
-        max_price = query_set.cleaned_data['max_price']
-        lowest_rating = query_set.cleaned_data['lowest_rating']
+        time_av = None
+        max_price = None
+        lowest_rating = None
+        if method == 'POST':
+            time_av = query_set.cleaned_data['time']
+            max_price = query_set.cleaned_data['max_price']
+            lowest_rating = query_set.cleaned_data['lowest_rating']
         # this is where we query the db and return the list of tutor objects
         # we can figure out how to link the tutor results to actual pages later
         # prolly through some url nonsense, or a view/redirect href html thing
         
+
+
     
     def search_results(request):
         tutors = None
@@ -109,10 +115,14 @@ class SearchResultsView(ListView):
         html = 'tutor_search_results.html'
         if request.method == 'POST':
             if form.is_valid():
-                tutors = SearchResultsView.tut_search(form)
+                tutors = SearchResultsView.tut_search(form, 'POST')
         else:
+            form = TutorSearchForm(request.GET)
+            if form.is_valid():
+                tutors = SearchResultsView.tut_search(form,'GET')
             form = TutorSearchFilterForm(request.GET)
-            tutors = SearchResultsView.tut_search(form)
+            
+            
             
         return render( request, html ,{
             'form': form
