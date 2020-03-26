@@ -81,7 +81,6 @@ class TutorSearchForm(forms.Form):
 
     
     class_search = forms.CharField(
-        label='searchbar',
         widget=forms.TextInput(attrs={'placeholder' : 'Search for Tutor by Class!'}))
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
