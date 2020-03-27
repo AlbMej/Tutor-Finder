@@ -98,6 +98,7 @@ class TutorSearchFilterForm(TutorSearchForm):
     time = forms.DateTimeField(initial=datetime.datetime.today,required=False)
     max_price = forms.DecimalField(required=False)
     lowest_rating = forms.DecimalField(initial=0.0,required=False)
+    school = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'School'}),required=False,empty_value=None)
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -105,13 +106,11 @@ class TutorSearchFilterForm(TutorSearchForm):
             'class_search',
             Row(
                 Column('time',css_class='form-group col-md-6 mb-0'),
+                Column('school',css_class='form-group col-md-6 mb-0'),
                 css_class = 'form_row'
             ),
             Row(
                 Column('max_price',css_class='form-group col-md-6 mb-0'),
-                css_class = 'form_row'
-            ),
-            Row(
                 Column('lowest_rating',css_class='form-group col-md-6 mb-0'),
                 css_class = 'form_row'
             ),

@@ -6,4 +6,16 @@
     <h1>Search Results</h1>
 
     {% crispy form %}
+
+    {% if not tutors.len == 0 %}
+        <h2>{{ tutors.len }}</h2>
+        <ul>
+            {% for tutor in tutors %}
+              <li>
+                {{ tutor.name }}, {{ tutor.price }}
+              </li>
+            {% endfor %}
+          </ul>
+
+    {% endif %}
 {% endblock %}

@@ -102,10 +102,18 @@ class SearchResultsView(ListView):
             time_av = query_set.cleaned_data['time']
             max_price = query_set.cleaned_data['max_price']
             lowest_rating = query_set.cleaned_data['lowest_rating']
+            school = query_set.cleaned_data['school']
         # this is where we query the db and return the list of tutor objects
         # we can figure out how to link the tutor results to actual pages later
         # prolly through some url nonsense, or a view/redirect href html thing
-        
+        tutor_query = Tutor.objects.filter(course__name__icontains=class_search)
+        if school != None:
+            tutor_query = tutor_query.filter(school__name__icontains=school)
+        if max_price != None:
+            tutor_query = tutor_query.filter(price__lte=max_price)
+        return tutor_query
+
+
 
 
     
@@ -122,10 +130,9 @@ class SearchResultsView(ListView):
                 tutors = SearchResultsView.tut_search(form,'GET')
             form = TutorSearchFilterForm(request.GET)
             
-            
-            
         return render( request, html ,{
-            'form': form
+            'form': form,
+            'tutors' : tutors
             })
 
     
