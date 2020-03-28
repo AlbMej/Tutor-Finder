@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
 
 {% block content %}
     <h1>Search Results</h1>
 
-    <ul>
-        {% for tutor in object_list %}
-        <li>
-            {{ tutor.name }}, {{ tutor.price }}
-        </li>
-        {% endfor %}
-    </ul>
+    {% crispy form %}
+
+    {% if not tutors.len == 0 %}
+        <h2>{{ tutors.len }}</h2>
+        <ul>
+            {% for tutor in tutors %}
+              <li>
+                {{ tutor.name }}, {{ tutor.price }}
+              </li>
+            {% endfor %}
+          </ul>
+
+    {% endif %}
 {% endblock %}
