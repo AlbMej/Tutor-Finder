@@ -98,6 +98,7 @@ class SearchResultsView(ListView):
         time_av = None
         max_price = None
         lowest_rating = None
+        school = None
         if method == 'POST':
             time_av = query_set.cleaned_data['time']
             max_price = query_set.cleaned_data['max_price']
