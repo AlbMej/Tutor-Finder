@@ -29,12 +29,12 @@ Changes to the models will result in a database change
 1. deactivate
 
 ### Setting up .env
-Tutor Finder expects the following variables to exist within the enviroment. 
+Tutor Finder expects the following variables to exist within the enviroment.  
 SECRET_KEY  
 SDDTF_USER  
 SDDTF_PASS  
 
-A example file could look like
+A example file could look like  
 '''  
 SECRET_KEY=mysecretkey  
 SDDTF_USER=myusername  
