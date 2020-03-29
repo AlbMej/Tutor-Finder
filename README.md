@@ -1,14 +1,45 @@
-# Test-Django-React-MongoDB
+# Tutor Finder
+
+Tutor Finder is a web app which allows students to find tutors
+for classes as well as register and make money as a tutor.
 
 ## Setup
-Make sure to have Python3 & virtualenv installed.
+Make sure to have Python3 & venv installed.
+Reference: https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
 
-1. Create a virtual environment by running the command `virtualenv env --python=python3.7`
-2. Activate the virtual environment by running `. env/bin/activate` or `source env/bin/activate`
-3. Install the dependencies via `pip3 install -r requirements.txt`
+1. Create the virtual enviroment (as explained in link above)
+2. Create .env file for local user, more details below about setting up this file
+3. Activate the enviroment (as explained in link above)
+4. Install the dependencies via `pip install -r requirements.txt`
 
-## Django Setup
+## Database Setup/Reset
 
-1. Create Django project using `django-admin startproject project_name`
-1. If step 4 throws an error, enter `sudo apt install python3-django` then run step 4 again. 
-2. Create MongoDB cluster at https://www.mongodb.com/cloud/atlas
+Changes to the models will result in a database change
+
+1. First check if a database file exists. If yes, delete that file
+2. python manage.py makemigrations
+3. python manage.py migrate
+
+## Launching the server
+1. python manage.py runserver
+2. Using the web brower of your choice go to `localhost:8000` (check list of supported browsers)
+3. Quit the server with CONTROL-C 
+
+## closing the virtual enviroment
+1. deactivate
+
+### Setting up .env
+Tutor Finder expects the following variables to exist within the enviroment
+SECRET_KEY
+SDDTF_USER
+SDDTF_PASS
+
+A example file could look like
+'''
+SECRET_KEY=mysecretkey
+SDDTF_USER=myusername
+SDDTF_PASS=mypassword
+'''
+
+Currently the values are not being used in a meaningful way, the values can be any non
+null value
