@@ -52,15 +52,6 @@ def submit_form(request):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            amount = form.cleaned_data['amount_required']
-            years = form.cleaned_data['years_in_college']
-
-            if amount > 25 and years < 1:
-                return redirect("denied")
-            elif amount < 25 and years >= 1:
-                return redirect("preapproved")
-            else:
-                return redirect("success")
 
     else:
         form = CustomFieldForm()
@@ -76,7 +67,7 @@ class SearchView(TemplateView):
     def search_form(request):
         form = TutorSearchFilterForm(request.POST)
         html = 'tutor_search.html'
-        
+
         if request.method == 'POST':
             if form.is_valid():
                 #insert get response with search results for the next page
@@ -89,10 +80,10 @@ class SearchView(TemplateView):
             form = TutorSearchForm()
         return render( request, html ,{'form': form})
 
-    
-    
+
+
 class SearchResultsView(ListView):
-    
+
     def tut_search(query_set,method):
         class_search = query_set.cleaned_data['class_search']
         time_av = None
@@ -117,7 +108,7 @@ class SearchResultsView(ListView):
 
 
 
-    
+
     def search_results(request):
         tutors = None
         form = TutorSearchFilterForm(request.POST)
@@ -130,10 +121,8 @@ class SearchResultsView(ListView):
             if form.is_valid():
                 tutors = SearchResultsView.tut_search(form,'GET')
             form = TutorSearchFilterForm(request.GET)
-            
+
         return render( request, html ,{
             'form': form,
             'tutors' : tutors
             })
-
-    

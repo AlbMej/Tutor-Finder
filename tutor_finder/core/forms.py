@@ -7,41 +7,44 @@ import datetime
 
 class InfoFieldForm(forms.ModelForm):
     class Meta:
+        #tells the form what model to user from models.py
         model = UserInfo
-        fields = ('first_name', 'last_name', 'email', 'phone',
-                'address', 'city', 'state', 'zip_code', 'amount_required',
-                'major', 'years_in_college', 'other', 'agree')
 
-        MAJORS = (
-                ('', 'Choose...'),
-                ('CS', 'Computer Science'),
-                ('EE', 'Electrical Engineering'),
-                ('CHEM', 'Chemistry'),
-                ('OTH', 'Other')
-            )
+        fields = ('first_name', 'last_name', 'phone_TB', 'email_TB', 'other_TB1'
+                 , 'other_TB2', 'agree',
+                 'school', 'level')
 
+        LEVELS = (
+                 ('' , 'Choose'),
+                 ('Fr', 'Freshman'),
+                 ('So', 'Sophmore'),
+                 ('Jr', 'Junior'),
+                 ('Sr', 'Senior'),
+                 ('M', 'Masters'),
+                 ('P', 'Phd')
+                 )
+
+        #for the text inputs, placeholder refers to example text in light gray
         widgets = {
-            'first_name': forms.TextInput(attrs={'placeholder': 'Ex. Alberto'}),
-            'last_name': forms.TextInput(attrs={'placeholder': 'Ex. Mejia'}),
-            'email': forms.TextInput(attrs={'placeholder': 'Ex. alberto@tutorfinder.com'}),
-            'phone': forms.TextInput(attrs={'placeholder': 'Ex. 914 123 4567'}),
-            'address': forms.TextInput(attrs={'placeholder': 'Apartment, studio, or floor, 1234 Main St'}),
-            'city': forms.TextInput(attrs={'placeholder': 'Yonkers'}),
-            'state': forms.TextInput(attrs={'placeholder': 'NY'}),
-            'zip_code': forms.TextInput(attrs={'placeholder': '10701'}),
-            'amount_required': forms.TextInput(attrs={'placeholder': '25'}),
-            'years_in_college': forms.TextInput(attrs={'placeholder': '3'}),
-            'other': forms.TextInput(attrs={'placeholder': 'N/A'})
+            'first_name': forms.TextInput(attrs={'placeholder': 'Ex. John'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Ex. Doe'}),
+            'phone_TB': forms.TextInput(attrs={'placeholder': 'Ex. 518-867-5309'}),
+            'email_TB': forms.TextInput(attrs={'placeholder': 'Ex. john.doe@example.com'}),
+            'other_TB1': forms.TextInput(attrs={'placeholder': 'Ex. Twitter'}),
+            'other_TB2': forms.TextInput(attrs={'placeholder': 'Ex. @JohnDoe'}),
+            'school': forms.TextInput(attrs={'placeholder': 'Ex. RPI'})
         }
 
 class CustomCheckbox(Field):
     template = 'custom_checkbox.html'
 
+#this class goes with the "InfoFieldForm" above
 class CustomFieldForm(InfoFieldForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['agree'].required = True
         self.helper = FormHelper()
+        #the layout, row by row
         self.helper.layout = Layout(
             Row(
                 Column('first_name', css_class='form-group col-md-6 mb-0'),
@@ -50,25 +53,24 @@ class CustomFieldForm(InfoFieldForm):
             ),
 
             Row(
-                Column('email', css_class='form-group col-md-6 mb-0'),
-                Column('phone', css_class='form-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
-
-
-            Row(
-                Column('address', css_class='form-group col-md-6 mb-0'),
-                Column('city', css_class='form-group col-md-2 mb-0'),
-                Column('state', css_class='form-group col-md-2 mb-0'),
-                Column('zip_code', css_class='form-group col-md-2 mb-0'),
+                Column('phone_TB', css_class='form-group col-md-12 mb-0'),
                 css_class='form-row'
             ),
 
             Row(
-                Column('amount_required', css_class='form-group col-md-4 mb-0'),
-                Column('major', css_class='form-group col-md-4 mb-0'),
-                Column('other', css_class='form-group col-md-2 mb-0'),
-                Column('years_in_college', css_class='form-group col-md-2 mb-0'),
+                Column('email_TB', css_class='form-group col-md-12 mb-0'),
+                css_class='form-row'
+            ),
+
+            Row(
+                Column('other_TB1', css_class='form-group col-md-5 mb-0'),
+                Column('other_TB2', css_class='form-group col-md-7 mb-0'),
+                css_class='form-row'
+            ),
+
+            Row(
+                Column('school', css_class='form-group col-md-6 mb-0'),
+                Column('level', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
 
@@ -79,7 +81,7 @@ class CustomFieldForm(InfoFieldForm):
 
 class TutorSearchForm(forms.Form):
 
-    
+
     class_search = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder' : 'Search for Tutor by Class!'}))
     def __init__(self, *args, **kwargs):
@@ -94,7 +96,7 @@ class TutorSearchForm(forms.Form):
 
 
 class TutorSearchFilterForm(TutorSearchForm):
-    
+
     time = forms.DateTimeField(initial=datetime.datetime.today,required=False)
     max_price = forms.DecimalField(required=False)
     lowest_rating = forms.DecimalField(initial=0.0,required=False)
@@ -116,4 +118,3 @@ class TutorSearchFilterForm(TutorSearchForm):
             ),
             Submit('submit','Apply Filters')
         )
-    
