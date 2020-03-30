@@ -2,34 +2,41 @@ from django.db import models
 
 # Create your models here.
 class UserInfo(models.Model):
-    MAJORS = (
-            ('', 'Choose...'),
-            ('CS', 'Computer Science'),
-            ('EE', 'Electrical Engineering'),
-            ('CHEM', 'Chemistry'),
-            ('OTH', 'Other')
-        )
-
+    #this is all database info for a tutoruser profile
+    LEVELS = (
+             ('' , 'Choose'),
+             ('Fr', 'Freshman'),
+             ('So', 'Sophmore'),
+             ('Jr', 'Junior'),
+             ('Sr', 'Senior'),
+             ('M', 'Masters'),
+             ('P', 'Phd')
+             )
+    #first and last name
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
-    email = models.EmailField()
 
-    phone = models.CharField(max_length=32)
-    address = models.CharField(max_length=256)
+    #contact information
+    #TB = text box
+    email_TB = models.EmailField("Email",
+                        help_text="Please fill in at least 1 form of contact")
+    phone_TB = models.CharField("Phone Number", max_length=12,
+                        help_text="Please fill in at least 1 form of contact")
+    other_TB1 = models.CharField("Other Contact Type", max_length=32,
+                        help_text="Please fill in at least 1 form of contact")
+    other_TB2 = models.CharField("Other Contact Information", max_length=32)
 
-    city = models.CharField(max_length=64)
-    state = models.CharField(max_length=32)
-    zip_code = models.CharField(max_length=32)
+    #their school and level (FR/SO/JR/SR/G/PHD)
+    school = models.CharField("College/University", max_length=32)
+    level = models.CharField("Level/Year", max_length=20, choices=LEVELS)
 
-    amount_required = models.IntegerField() #label = 'Amount required'
-    major = models.CharField(max_length=3, choices=MAJORS)
-    years_in_college = models.IntegerField() #label='Years in business'
-    other = models.CharField(max_length=64)
-
-    agree = models.BooleanField()  #required=True
+    #terms and conditions that have yet to be written
+    agreeMsg = "Do you agree to the terms and conditions listed below?"
+    agree = models.BooleanField(agreeMsg)  #required=True
 
 
-      
+
+
 class School(models.Model):
     name = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
