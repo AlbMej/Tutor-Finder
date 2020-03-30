@@ -52,7 +52,6 @@ def submit_form(request):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            years = form.cleaned_data['years_in_college']
 
     else:
         form = CustomFieldForm()
