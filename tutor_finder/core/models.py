@@ -19,16 +19,21 @@ class UserInfo(models.Model):
     #contact information
     #TB = text box
     email_TB = models.EmailField("Email",
-                        help_text="Please fill in at least 1 form of contact")
+                        help_text="Please fill in at least 1 form of contact",
+                        default="N/A")
     phone_TB = models.CharField("Phone Number", max_length=12,
-                        help_text="Please fill in at least 1 form of contact")
+                        help_text="Please fill in at least 1 form of contact",
+                        default="N/A")
     other_TB1 = models.CharField("Other Contact Type", max_length=32,
-                        help_text="Please fill in at least 1 form of contact")
-    other_TB2 = models.CharField("Other Contact Information", max_length=32)
+                        help_text="Please fill in at least 1 form of contact",
+                        default = "N/A")
+    other_TB2 = models.CharField("Other Contact Information", max_length=32,
+                                default="N/A")
 
     #their school and level (FR/SO/JR/SR/G/PHD)
-    school = models.CharField("College/University", max_length=32)
-    level = models.CharField("Level/Year", max_length=20, choices=LEVELS)
+    school = models.CharField("College/University", max_length=32, default="N/A")
+    level = models.CharField("Level/Year", max_length=20, choices=LEVELS,
+                             default="N/A")
 
     #terms and conditions that have yet to be written
     agreeMsg = "Do you agree to the terms and conditions listed below?"
