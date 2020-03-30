@@ -18,12 +18,20 @@ import datetime
 
 
 # Create your views here.
+
+# Render home page view
+# count fills out number of registered users
 def home(request):
     count = User.objects.count()
     return render(request, 'home.html', {
         'count': count
     })
 
+
+# Render signup page
+# POST HTTP request fills form with valid
+# data, saves to db via django model/db access API
+# otherwise populates empty form for submission
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -36,16 +44,24 @@ def signup(request):
         'form': form
     })
 
+# Render simple tutor signup success page
 class SuccessView(TemplateView):
     template_name = 'success.html'
 
+# Render simple tutor signup denial page
 class DeniedView(TemplateView):
     template_name = 'denied.html'
 
+# Render preapproval tutor page
 class PreapprovedView(TemplateView):
     template_name = 'preapproved.html'
 
-
+# If user is logged in 
+# GET request renders empty Tutor Signup form
+# POST request saves valid form data to DB, verifies 
+# a valid tutor signup, performs redirect as needed based on verification
+# If user is NOT logged in:
+# denies access, redirect to login
 @login_required
 def submit_form(request):
     form = CustomFieldForm(request.POST)
@@ -60,7 +76,12 @@ def submit_form(request):
         'form': CustomFieldForm()
     })
 
-
+# renders tutor search form
+# only responsible for rendering the single search bar
+# with no filters
+# GET renders a blank search bar
+# POST forwards the search term to a results/filter template form
+# @SearchResultsView via POST request via DJANGO redirect API
 class SearchView(TemplateView):
     template_name = 'tutor_search.html'
 
@@ -81,9 +102,19 @@ class SearchView(TemplateView):
         return render( request, html ,{'form': form})
 
 
+# accepts requests from @SearchView
+# a POST request querys the DB given the search
+# term and given filters (if any) via the Django db/model API
+# renders given results in a list
+# A GET renders empty form  
+    
+class SearchResultsView(ListView):
+    
+
+    ### Applies search to DB given valid form data
+
 
 class SearchResultsView(ListView):
-
     def tut_search(query_set,method):
         class_search = query_set.cleaned_data['class_search']
         time_av = None
@@ -106,6 +137,11 @@ class SearchResultsView(ListView):
         return tutor_query
 
 
+
+
+
+    ### Handles search form submission, validates submission data, Django parses
+    ### into a neatly made list, submitted to query function
 
 
 

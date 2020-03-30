@@ -5,6 +5,11 @@ from django.core.exceptions import ValidationError
 from tutor_finder.core.models import UserInfo
 import datetime
 
+
+
+# Form to display text/other submission widgets,
+# and to gather form data, mirrored to a tutor model for 
+# easy db submission/storage
 class InfoFieldForm(forms.ModelForm):
     class Meta:
         #tells the form what model to user from models.py
@@ -79,6 +84,8 @@ class CustomFieldForm(InfoFieldForm):
         )
 
 
+# form to display tutor search bar, used to 
+# validate data, and foward to search results/filters
 class TutorSearchForm(forms.Form):
 
 
@@ -94,7 +101,10 @@ class TutorSearchForm(forms.Form):
 
 
 
-
+# form to display/capture search filter user filled data
+# inherents from TutorSearchForm in order to bring along the 
+# general search bar and to provide the filtered form with 
+# access to the general search term
 class TutorSearchFilterForm(TutorSearchForm):
 
     time = forms.DateTimeField(initial=datetime.datetime.today,required=False)
