@@ -68,15 +68,6 @@ def submit_form(request):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            amount = form.cleaned_data['amount_required']
-            years = form.cleaned_data['years_in_college']
-
-            if amount > 25 and years < 1:
-                return redirect("denied")
-            elif amount < 25 and years >= 1:
-                return redirect("preapproved")
-            else:
-                return redirect("success")
 
     else:
         form = CustomFieldForm()
@@ -97,7 +88,7 @@ class SearchView(TemplateView):
     def search_form(request):
         form = TutorSearchFilterForm(request.POST)
         html = 'tutor_search.html'
-        
+
         if request.method == 'POST':
             if form.is_valid():
                 #insert get response with search results for the next page
@@ -110,6 +101,7 @@ class SearchView(TemplateView):
             form = TutorSearchForm()
         return render( request, html ,{'form': form})
 
+
 # accepts requests from @SearchView
 # a POST request querys the DB given the search
 # term and given filters (if any) via the Django db/model API
@@ -120,6 +112,9 @@ class SearchResultsView(ListView):
     
 
     ### Applies search to DB given valid form data
+
+
+class SearchResultsView(ListView):
     def tut_search(query_set,method):
         class_search = query_set.cleaned_data['class_search']
         time_av = None
@@ -144,8 +139,12 @@ class SearchResultsView(ListView):
 
 
 
+
     ### Handles search form submission, validates submission data, Django parses
     ### into a neatly made list, submitted to query function
+
+
+
     def search_results(request):
         tutors = None
         form = TutorSearchFilterForm(request.POST)
@@ -158,10 +157,8 @@ class SearchResultsView(ListView):
             if form.is_valid():
                 tutors = SearchResultsView.tut_search(form,'GET')
             form = TutorSearchFilterForm(request.GET)
-            
+
         return render( request, html ,{
             'form': form,
             'tutors' : tutors
             })
-
-    
