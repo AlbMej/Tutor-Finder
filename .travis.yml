@@ -9,7 +9,6 @@ python:
   - "3.6" # current default Python on Travis CI
   - "3.7" 
   - "3.8" # highest python version supported by Django
-  - "pypy3" # pypy is for testing, runs way faster than pyC
 
 services:
   - postgresql
