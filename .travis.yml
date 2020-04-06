@@ -1,29 +1,30 @@
 branches:
   only:
   - master
-services: mongodb
+  - alberto-patch
+
 language: python
+
 python:
-  - "2.7" #lowest version of python supported by Django
-  - "3.8" #highest python version supported by Django
-  - "pypy" #pypy is for testing, runs way faster than pyC
+  - "3.6" # current default Python on Travis CI
+  - "3.7" 
+  - "3.8" # highest python version supported by Django
+  - "pypy3" # pypy is for testing, runs way faster than pyC
+
+services:
+  - postgresql
+
 env:
-  - DJANGO="Django>=1.11,<2.0" #older django
-  - DJANGO="Django>=2.0,<3.0" #newer django
+  - DJANGO="Django>=3"
 
-#exclusion matrix is necassary so we dont try to build django 1.1 with python 3
+install: # command to install dependencies
+    - pip install -r requirements.txt
 
-jobs:
-  exclude:
-  - python: "2.7"
-    env: DJANGO="Django>=2.0,<3.0"
-  - python: "pypy"
-    env: DJANGO="Django>=2.0,<3.0" #unsure of this, read on stackexhange that this was needed
+before_script:
+  - psql -c 'create database test_db;' -U postgres
 
-install:
-  - pip install -q $DJANGO
-  - pip install pylint
+script: # command to run tests
+  - python manage.py syncdb --noinput
 
-#when tests are developed, they should be placed here
-notifications:
+notifications: # when tests are developed, they should be placed here
   slack: sddspaghetticode:NyaUgvSVibaHRlBFifCvP6Lw

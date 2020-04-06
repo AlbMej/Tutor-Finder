@@ -6,6 +6,7 @@ dj-static
 djangorestframework
 python-decouple
 psycopg2-binary
+pylint
 gunicorn
 whitenoise
 Unipath
