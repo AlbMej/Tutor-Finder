@@ -36,7 +36,6 @@ DEBUG = False
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Application definition
 
@@ -89,22 +88,9 @@ WSGI_APPLICATION = 'tutor_finder.wsgi.application'
 #          Moved database credentials to a local file             #
 ###################################################################
 
-DATABASES = { # MongoDB Atlas doesn't work locally (Think bc of free version). Use this for local testing. 
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
-    }
-}
-
-# DATABASES = { 
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'postgres',
-#         'USER': 'postgres',
-#         'HOST': 'db',
-#         'PORT': 5432,
-#     }
-# }
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(default='sqlite:/mydatabase.sqlite') # Use Postgres
+# DATABASES['default'] = dj_database_url.config(default='postgres://...')
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
