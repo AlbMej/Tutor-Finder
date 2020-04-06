@@ -25,7 +25,7 @@ before_script:
 script: # command to run tests
   - python manage.py makemigrations
   - python manage.py migrate
-  - python manage.py runserver
+  - python manage.py runserver &
 
 after_script:
   - pkill -f runserver
