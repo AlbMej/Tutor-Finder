@@ -1,24 +1,26 @@
 # Tutor Finder
 
-Tutor Finder is a web app which allows students to find tutors
-for classes as well as register and make money as a tutor.
+Tutor Finder is a web app which allows students to find tutors for classes as well as register and make money as a tutor.
 
 ## Setup
 Make sure to have Python3 & venv installed.
 Reference: https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
 
 1. Create the virtual enviroment (as explained in link above)
-2. Create .env file for local user, more details below about setting up this file
-3. Activate the enviroment (as explained in link above)
-4. Install the dependencies via `pip install -r requirements.txt`
+2. Activate the enviroment (as explained in link above)
+3. Install the dependencies via `pip install -r requirements.txt`
 
 ## Database Setup/Reset
 
-Changes to the models will result in a database change
+Any changes to the models will result in a database change. The DATABASE_URL environment variable should be set up already by Heroku Postgres.
+However, locally you need PostgreSQL installed. You can have dj_database_url fall back to SQLite but it's strongly recommended to use the same database engine in all of your environments. 
+You don't want to have your code work locally with SQLite, but fail in production with PostgreSQL.
 
-1. First check if a database file exists. If yes, delete that file
-2. python manage.py makemigrations
-3. python manage.py migrate
+1. Command for Ubuntu to install postgresql: `sudo apt-get install postgresql`
+2. Use the OS user postgres to create the database, enter: `sudo -u postgres -i` (opens another terminal)
+3. Create a database named test_db by the user postgres: `psql -c 'create database test_db;' -U postgres`
+4. python manage.py makemigrations
+5. python manage.py migrate
 
 ## Launching the server
 1. python manage.py runserver
@@ -29,17 +31,26 @@ Changes to the models will result in a database change
 1. deactivate
 
 ### Setting up .env
+
 Tutor Finder expects the following variables to exist within the enviroment.  
 SECRET_KEY  
-SDDTF_USER  
-SDDTF_PASS  
 
-A example file could look like  
+A example .env file could look like  
 '''  
-SECRET_KEY=mysecretkey  
-SDDTF_USER=myusername  
-SDDTF_PASS=mypassword  
+SECRET_KEY='yOuR_sEcReCt_KeY'  
 '''  
 
-Currently the values are not being used in a meaningful way, the values can be any non
-null value
+## Common errors
+
+1. (For Ubuntu) If you ever get an error asking "Is the server running locally and accepting connections on Unix domain socket "/var/run/postgresql/.s.PGSQL.5432"?"
+Start the server with `sudo service postgresql start`. You can also stop the server with `sudo service postgresql stop`.
+
+2. If you get a "no password supplied" error, go into your pg_hba.conf file where ever it is located and change md5/peer to trust in the local line/s. For example mine was:
+`sudo nano /etc/postgresql/10/main/pg_hba.conf`
+Then restart the server with: `sudo /etc/init.d/postgresql restart`
+
+3. If you get a "psql: FATAL:  Peer authentication failed for user "postgres" error, try: `sudo -u postgres psql -c 'create database test_db;' -U postgres`
+OR go back into the pg_hba.conf file and md5/peer to trust in the host line/s.
+
+4. If you are really desperate and nothing works try setting all the lines to trust lol. 
+

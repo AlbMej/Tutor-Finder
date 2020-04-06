@@ -27,7 +27,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECRET_KEY = os.environ['SECRET_KEY']  #<-- Use this if you store your secret keys as an environment variable (EX. export SECRET_KEY="mYsEcReTkEy")
 SECRET_KEY = config('SECRET_KEY')
-
 ###################################################################
 # SECURITY WARNING: don't run with debug turned on in production! #### People kept committing local credentials file by accident ####
 ###################################################################
@@ -88,9 +87,11 @@ WSGI_APPLICATION = 'tutor_finder.wsgi.application'
 #          Moved database credentials to a local file             #
 ###################################################################
 
+
+
 DATABASES = {}
-DATABASES['default'] = dj_database_url.config(default='sqlite:/mydatabase.sqlite') # Use Postgres
-# DATABASES['default'] = dj_database_url.config(default='postgres://...')
+# DATABASES['default'] = dj_database_url.config(default='sqlite:/mydatabase.sqlite') # Fall back to sqlite, can create database when running migrations
+DATABASES['default'] = dj_database_url.config(default='postgres://postgres@localhost/test_db') # Need to have Postgres installed locally and test_db set up.
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
