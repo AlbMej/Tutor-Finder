@@ -3,10 +3,8 @@ from decouple import config
 DEBUG = False
 ADMINS = [('Alberto Mejia', 'albertomejia295@gmail.com')]
 
-# SDDTF_USER = os.environ['SDDTF_USER']  #<-- Similarly, use this if you store your SDDTF/Mongo username as an environment variable
-# SDDTF_PASS = os.environ['SDDTF_PASS']  #<-- Same thing for password
-SDDTF_USER = config('SDDTF_USER')
-SDDTF_PASS = config('SDDTF_PASS')
+# SDDTF_USER = config('SDDTF_USER') # Removed MongoDB, Only need dj_database_url()
+# SDDTF_PASS = config('SDDTF_PASS') # in base settings for Heroku Postgres 
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
