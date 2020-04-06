@@ -23,7 +23,9 @@ before_script:
   - psql -c 'create database test_db;' -U postgres
 
 script: # command to run tests
-  - python manage.py syncdb --noinput
+  - python manage.py makemigrations
+  - python manage.py migrate
+  - python manage.py runserver
 
 notifications: # when tests are developed, they should be placed here
   slack: sddspaghetticode:NyaUgvSVibaHRlBFifCvP6Lw
