@@ -28,7 +28,10 @@ script: # command to run tests
   - python manage.py runserver &
 
 after_script:
+  - echo "Kill script in 5s..."
+  - sleep 5s
   - pkill -f runserver
-
+  - echo "Server killed"
+  
 notifications: # when tests are developed, they should be placed here
   slack: sddspaghetticode:NyaUgvSVibaHRlBFifCvP6Lw
