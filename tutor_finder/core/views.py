@@ -13,10 +13,6 @@ from .models import Tutor, School, Course
 from urllib.parse import urlencode
 import datetime
 
-
-
-
-
 # Create your views here.
 
 # Render home page view
@@ -107,14 +103,9 @@ class SearchView(TemplateView):
 # term and given filters (if any) via the Django db/model API
 # renders given results in a list
 # A GET renders empty form  
-    
-class SearchResultsView(ListView):
-    
 
+class SearchResultsView(ListView):
     ### Applies search to DB given valid form data
-
-
-class SearchResultsView(ListView):
     def tut_search(query_set,method):
         class_search = query_set.cleaned_data['class_search']
         time_av = None
@@ -136,15 +127,8 @@ class SearchResultsView(ListView):
             tutor_query = tutor_query.filter(price__lte=max_price)
         return tutor_query
 
-
-
-
-
     ### Handles search form submission, validates submission data, Django parses
     ### into a neatly made list, submitted to query function
-
-
-
     def search_results(request):
         tutors = None
         form = TutorSearchFilterForm(request.POST)

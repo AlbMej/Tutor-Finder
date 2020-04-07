@@ -1,4 +1,4 @@
-django<3
+django
 django-bootstrap4
 django-crispy-forms
 dj-database-url
@@ -6,10 +6,10 @@ dj-static
 djangorestframework
 python-decouple
 psycopg2-binary
+pylint
 gunicorn
 whitenoise
 Unipath
-djongo
 python-dateutil
 dnspython
 sqlparse==0.2.4
