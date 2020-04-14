@@ -7,6 +7,6 @@ def index(request):
     return render(request, 'chat/index.html')
 
 def room(request, room_name):
-    return render(request, 'chat/room.html', {
-        'room_name': room_name
-    })
+    current_user = str(request.user)
+    args = {'room_name': room_name}
+    return render(request, 'chat/room.html', args)
