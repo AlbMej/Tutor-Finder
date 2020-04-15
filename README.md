@@ -34,8 +34,7 @@ You don't want to have your code work locally with SQLite, but fail in productio
 
 ## Docker for chat
 
-To use the chat feature, you need a docker running. In Ubuntu, this command should do the trick.
-'sudo docker run -p 6379:6379 -d redis:5'
+To use the chat feature, you need a docker running. In Ubuntu, this command should do the trick: `sudo docker run -p 6379:6379 -d redis:5`
 
 ## Launching the server
 1. python manage.py runserver
