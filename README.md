@@ -10,10 +10,20 @@ Reference: https://packaging.python.org/guides/installing-using-pip-and-virtual-
 2. Activate the enviroment (as explained in link above)
 3. Install the dependencies via `pip install -r requirements.txt`
 
+### Setting up .env
+
+Tutor Finder expects the following variables to exist within the environment.  
+SECRET_KEY  
+
+A example .env file could look like  
+'''  
+SECRET_KEY='yOuR_sEcReCt_KeY'  
+'''  
+
 ## Database Setup/Reset
 
 Any changes to the models will result in a database change. The DATABASE_URL environment variable should be set up already by Heroku Postgres.
-However, locally you need PostgreSQL installed. You can have dj_database_url fall back to SQLite but it's strongly recommended to use the same database engine in all of your environments. 
+However, locally you need PostgreSQL installed. You can have dj_database_url fall back to SQLite but it's strongly recommended to use the same database engine in all of your environments.
 You don't want to have your code work locally with SQLite, but fail in production with PostgreSQL.
 
 1. Command for Ubuntu to install postgresql: `sudo apt-get install postgresql`
@@ -22,23 +32,17 @@ You don't want to have your code work locally with SQLite, but fail in productio
 4. python manage.py makemigrations
 5. python manage.py migrate
 
+## Docker for chat
+
+To use the chat feature, you need a docker running. In Ubuntu, this command should do the trick: `sudo docker run -p 6379:6379 -d redis:5`
+
 ## Launching the server
 1. python manage.py runserver
-2. Using the web brower of your choice go to `localhost:8000` (check list of supported browsers)
-3. Quit the server with CONTROL-C 
+2. Using the web browser of your choice go to `localhost:8000` (check list of supported browsers)
+3. Quit the server with CONTROL-C
 
-## closing the virtual enviroment
+## closing the virtual environment
 1. deactivate
-
-### Setting up .env
-
-Tutor Finder expects the following variables to exist within the enviroment.  
-SECRET_KEY  
-
-A example .env file could look like  
-'''  
-SECRET_KEY='yOuR_sEcReCt_KeY'  
-'''  
 
 ## Common errors
 
@@ -52,5 +56,4 @@ Then restart the server with: `sudo /etc/init.d/postgresql restart`
 3. If you get a "psql: FATAL:  Peer authentication failed for user "postgres" error, try: `sudo -u postgres psql -c 'create database test_db;' -U postgres`
 OR go back into the pg_hba.conf file and md5/peer to trust in the host line/s.
 
-4. If you are really desperate and nothing works try setting all the lines to trust lol. 
-
+4. If you are really desperate and nothing works try setting all the lines to trust.

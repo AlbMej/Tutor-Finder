@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from tutor_finder.core import views
+from django.conf.urls import include
 
 
 urlpatterns = [
@@ -29,4 +30,5 @@ urlpatterns = [
     path('tutor_search_results/', views.SearchResultsView.search_results, name = 'tutor_search_results'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
+    path('chat/', include('chat.urls'))
 ]

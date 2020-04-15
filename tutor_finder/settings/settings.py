@@ -39,6 +39,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'channels_presence',
     'tutor_finder.core',
     'tutor_finder',
     'django.contrib.admin',     # Uncomment line to enable the admin:
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'bootstrap4',
     'crispy_forms',
+    'chat'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +131,15 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+
+# Channels
+ASGI_APPLICATION = 'tutor_finder.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
