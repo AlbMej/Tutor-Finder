@@ -40,6 +40,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 INSTALLED_APPS = [
     'channels',
+    'channels_presence',
     'tutor_finder.core',
     'tutor_finder',
     'django.contrib.admin',     # Uncomment line to enable the admin:
