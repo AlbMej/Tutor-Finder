@@ -8,13 +8,12 @@
       {% for r in rooms %}
         <option value={{r}}>{{r}}</option>
       {% endfor %}
-    <p>   </p>
     <input id="room-name-submit-existing" type="button" value="Join">
+    <p>Or, start a new one:</p>
   {% else %}
     <p>No rooms are currently open, try making a new one.</p>
   {% endif %}
   </select>
-  <p>Or, start a new one:</p>
   <input id="room-name-input" type="text" size="100" align="center"><br>
   <input id="room-name-submit" type="button" value="Create">
 
