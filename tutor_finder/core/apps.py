@@ -1,3 +1,9 @@
+'''
+Auto generated file
+
+Do not edit
+'''
+
 from django.apps import AppConfig
 
 

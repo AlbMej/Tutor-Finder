@@ -1,3 +1,8 @@
+<!--
+This file displays the tutors for tutor search based
+on the filter function
+-->
+
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
@@ -12,6 +17,7 @@
         <ul>
             {% for tutor in tutors %}
               <li>
+                <!-- Each tutor in the list will revieve their onw listing -->
                 {{ tutor.name }}, ${{ tutor.price }}/hr
                 <button id="tutor_select" class="btn btn-primary" onClick="reply_click({{tutor.id}})">Connect with {{tutor.name}}</button>
               </li>
@@ -19,8 +25,9 @@
           </ul>
 
     {% endif %}
+    <!-- javascript function onclick for connecting with tutor -->
+    <!-- Default msg can change in the future, this is placeholder -->
     <script type="text/javascript">
-      console.log("Hello world")
       function reply_click(id)
       {
         var msg = id + ": Preferred contact method through chat room ";

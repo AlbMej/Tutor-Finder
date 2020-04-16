@@ -1,3 +1,20 @@
+'''
+Desciption
+
+File contains all objects to be stored in the database,
+each class inheriting from model will get its own table
+within the database,
+
+If this file is eddited be sure to run the following scripts
+python manage.py makemigrations
+python manage.py migrate
+
+If errors occur, attempt to drop the database entirely
+It may be necessary to drop the database from a seperate
+database as psql will not allow a database to be dropped
+if an active session exists
+'''
+
 from django.db import models
 
 # Create your models here.

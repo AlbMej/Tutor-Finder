@@ -1,3 +1,10 @@
+'''
+Description
+
+This file contains all of the settings
+which sets up heroku for continuous deployment
+'''
+
 from .settings import * #Import base settings
 from decouple import config
 DEBUG = False
