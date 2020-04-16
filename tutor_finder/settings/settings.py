@@ -8,6 +8,10 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
+
+Description
+
+This file sets global level variables for the Tutor Finder Web app
 """
 import os
 from decouple import config

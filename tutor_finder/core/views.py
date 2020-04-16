@@ -1,3 +1,10 @@
+'''
+This file is designed as the controller
+if viewing as the model-view-controller
+pattern, all html files rendered here
+and the data is POSTed here for text processing
+'''
+
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.db.models import Q

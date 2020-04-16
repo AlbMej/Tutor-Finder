@@ -1,3 +1,14 @@
+'''
+Description
+
+This file contains the python
+backend for every form with the webapp.
+Forms are the most common way of getting
+user input from the User Interface and 
+processing it into a database table
+'''
+
+
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, Field
