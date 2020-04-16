@@ -8,6 +8,10 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
+
+Description
+
+This file sets global level variables for the Tutor Finder Web app
 """
 import os
 from decouple import config
@@ -32,13 +36,15 @@ SECRET_KEY = config('SECRET_KEY')
 ###################################################################
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.179','192.16=8.1.179']
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'channels_presence',
     'tutor_finder.core',
     'tutor_finder',
     'django.contrib.admin',     # Uncomment line to enable the admin:
@@ -51,6 +57,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'bootstrap4',
     'crispy_forms',
+    'chat'
 ]
 
 MIDDLEWARE = [
@@ -138,3 +145,15 @@ EMAIL_HOST_PASSWORD = 'ZJkkunjKwfGZs47'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+
+# Channels
+ASGI_APPLICATION = 'tutor_finder.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}

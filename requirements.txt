@@ -1,6 +1,9 @@
+channels
+channels_redis
 django
 django-bootstrap4
 django-crispy-forms
+django-channels-presence
 dj-database-url
 dj-static
 djangorestframework

@@ -1,14 +1,26 @@
+'''
+Description
+
+This file contains the python
+backend for every form with the webapp.
+Forms are the most common way of getting
+user input from the User Interface and 
+processing it into a database table
+'''
+
+
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, Field
 from django.core.exceptions import ValidationError
 from tutor_finder.core.models import UserInfo
+from tutor_finder.core.models import Tutor
 import datetime
 
 
 
 # Form to display text/other submission widgets,
-# and to gather form data, mirrored to a tutor model for 
+# and to gather form data, mirrored to a tutor model for
 # easy db submission/storage
 class InfoFieldForm(forms.ModelForm):
     class Meta:
@@ -84,7 +96,7 @@ class CustomFieldForm(InfoFieldForm):
         )
 
 
-# form to display tutor search bar, used to 
+# form to display tutor search bar, used to
 # validate data, and foward to search results/filters
 class TutorSearchForm(forms.Form):
 
@@ -102,8 +114,8 @@ class TutorSearchForm(forms.Form):
 
 
 # form to display/capture search filter user filled data
-# inherents from TutorSearchForm in order to bring along the 
-# general search bar and to provide the filtered form with 
+# inherents from TutorSearchForm in order to bring along the
+# general search bar and to provide the filtered form with
 # access to the general search term
 class TutorSearchFilterForm(TutorSearchForm):
 
@@ -127,4 +139,41 @@ class TutorSearchFilterForm(TutorSearchForm):
                 css_class = 'form_row'
             ),
             Submit('submit','Apply Filters')
+        )
+
+
+class TutorListing(forms.ModelForm):
+    class Meta:
+        #tells the form what model to user from models.py
+        model = Tutor
+
+        fields = ('name', 'price', 'course', 'school')
+
+        #for the text inputs, placeholder refers to example text in light gray
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Perferred name'}),
+            'price': forms.TextInput(attrs={'placeholder': 'Ex. 15 (this is $/hr)'}),
+            'course': forms.TextInput(attrs={'placeholder': 'Ex. Software Design and Documentation'}),
+            'school': forms.TextInput(attrs={'placeholder': 'Ex. RPI'})
+        }
+
+#this class goes with the "TutorListing" above
+class TutorListingForm(TutorListing):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        #the layout, row by row
+        self.helper.layout = Layout(
+            Row(
+                Column('name', css_class='form-group col-md-4 mb-0'),
+                Column('price', css_class='form-group col-md-4 mb-0'),
+                Column('school', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+
+            Row(
+                Column('course', css_class='form-group col-md-12 mb-0'),
+                css_class='form-row'
+            ),
+            Submit('submit', 'Submit')
         )

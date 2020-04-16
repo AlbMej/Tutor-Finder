@@ -1,3 +1,11 @@
+<!--
+This file acts as the body of the home
+page when first opening the webapp
+
+This page schould only contains immediatly 
+important content to all viwers of the webapp
+-->
+
 {% extends 'base.html' %}
 
 {% block content %}
@@ -8,13 +16,13 @@
   {% if user.is_authenticated %}
   {{ user.username }}!
   <p>
-  Click on the Find Tutors tab to begin looking for tutors.
+  Click on the Tutor Search tab to begin looking for tutors.
   </p>
   {% else %}
   visitor!
   <p>
   Create an account or login to get started.
-  </p>  
+  </p>
   {% endif %}</p>
   <p>
     <strong>Total users registered: </strong> {{ count }}

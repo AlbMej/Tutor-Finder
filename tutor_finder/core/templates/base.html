@@ -1,10 +1,19 @@
+<!--
+This file acts as the base and all future pages build ontop
+of this page, any additional html will be placed within the
+content block
+-->
+
+<!-- Default html -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!-- Expand the title of the webpage -->
   <title>{% block title %} Site{% endblock %}</title>
+  <!-- inline css -->
   <style type="text/css">
     .asteriskField {
       display: none;
@@ -19,6 +28,7 @@
   </style>
 </head>
 <body>
+  <!-- Navbar, add here to include a new tab -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
     <div class="container">
       <a class="navbar-brand" href="{% url 'home' %}">Tutor Finder</a>
@@ -33,9 +43,16 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'tutor_search' %}">Tutor Search</a>
           </li>
+          <!-- These items will not appear if the user is not logged on -->
           {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'tutorform' %}">Tutor Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">Chat Room</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'create_listing' %}">Create Tutor Listing</a>
             </li>
           {% endif %}
 
@@ -62,7 +79,7 @@
       </div>
     </div>
   </nav>
-
+  <!-- body of webpages will expand here -->
   <div class="container">
     {% block content %}
     {% endblock %}
