@@ -19,7 +19,8 @@ from .forms import CustomFieldForm, TutorSearchForm, TutorSearchFilterForm, Tuto
 from .models import Tutor, School, Course, UserInfo
 from urllib.parse import urlencode
 import datetime
-
+from django.contrib.auth import login, authenticate
+from tutor_finder.core.forms import SignUpForm
 # Create your views here.
 
 # Render home page view
@@ -37,12 +38,16 @@ def home(request):
 # otherwise populates empty form for submission
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'registration/signup.html', {
         'form': form
     })
