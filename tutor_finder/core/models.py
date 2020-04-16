@@ -20,20 +20,20 @@ class UserInfo(models.Model):
     #TB = text box
     email_TB = models.EmailField("Email",
                         help_text="Please fill in at least 1 form of contact",
-                        default="N/A")
+                        default=None)
     phone_TB = models.CharField("Phone Number", max_length=12,
                         help_text="Please fill in at least 1 form of contact",
-                        default="N/A")
+                        default=None)
     other_TB1 = models.CharField("Other Contact Type", max_length=32,
                         help_text="Please fill in at least 1 form of contact",
-                        default = "N/A")
+                        default = None)
     other_TB2 = models.CharField("Other Contact Information", max_length=32,
-                                default="N/A")
+                                default=None)
 
     #their school and level (FR/SO/JR/SR/G/PHD)
-    school = models.CharField("College/University", max_length=32, default="N/A")
+    school = models.CharField("College/University", max_length=32, default=None)
     level = models.CharField("Level/Year", max_length=20, choices=LEVELS,
-                             default="N/A")
+                             default=None)
 
     #terms and conditions that have yet to be written
     agreeMsg = "Do you agree to the terms and conditions listed below?"
@@ -54,8 +54,8 @@ class Course(models.Model):
 class Tutor(models.Model):
     name = models.CharField(max_length=225)
     price = models.IntegerField()
-    course = models.CharField(max_length=64)
-    school = models.CharField(max_length=64)
+    course = models.CharField(max_length=64, default = None)
+    school = models.CharField(max_length=64, default = None)
     #course = models.ForeignKey(Course, on_delete=models.CASCADE, default = None)
     #school = models.ForeignKey(School, on_delete=models.CASCADE, default = None)
 
