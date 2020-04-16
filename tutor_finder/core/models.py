@@ -59,7 +59,6 @@ class Tutor(models.Model):
     price = models.IntegerField()
     course = models.ForeignKey(Course, on_delete=models.CASCADE, default = None)
     school = models.ForeignKey(School, on_delete=models.CASCADE, default = None)
-    availability = []
 
 
     def __str__(self):

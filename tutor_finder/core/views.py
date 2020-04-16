@@ -40,6 +40,9 @@ def signup(request):
         'form': form
     })
 
+def new_tutor(request):
+    print("hit 2")
+
 # Render simple tutor signup success page
 class SuccessView(TemplateView):
     template_name = 'success.html'
@@ -60,6 +63,7 @@ class PreapprovedView(TemplateView):
 # denies access, redirect to login
 @login_required
 def submit_form(request):
+    print(request.user)
     form = CustomFieldForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
@@ -146,3 +150,15 @@ class SearchResultsView(ListView):
             'form': form,
             'tutors' : tutors
             })
+
+
+
+class SessionView(TemplateView):
+    template_name = 'sessions.html'
+    # def NewTutor(request):
+    #     if request.method == "POST":
+    #         print("hit")
+    #         return render(request, 'registration/signup.html', {
+    #     'form': form
+    #     })
+

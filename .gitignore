@@ -134,6 +134,7 @@ dmypy.json
 
 # Database
 mydatabase
+node_modules
 
 # vscode
  .vscode/ 

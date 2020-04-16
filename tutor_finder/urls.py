@@ -30,5 +30,7 @@ urlpatterns = [
     path('tutor_search_results/', views.SearchResultsView.search_results, name = 'tutor_search_results'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    path('chat/', include('chat.urls'))
+    path('chat/', include('chat.urls')),
+    path('tutor_sessions/', views.SessionView.as_view(), name='sessions'),
+    # path('tutor_sessions/request/', views.SessionView.NewTutor, name='trigger')
 ]

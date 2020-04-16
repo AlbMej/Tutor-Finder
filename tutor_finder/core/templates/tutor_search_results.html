@@ -12,10 +12,25 @@
         <ul>
             {% for tutor in tutors %}
               <li>
-                {{ tutor.name }}, {{ tutor.price }}
+                <form method="post">
+                {% csrf_token %}
+                {{ tutor.name }}, {{ tutor.price }},
+                <button id="tutor_select" class="btn btn-primary" onClick="reply_click({{tutor.id}})">Connect with {{tutor.name}}</button>
+              </form>
+
               </li>
             {% endfor %}
           </ul>
 
     {% endif %}
+
+<script type="text/javascript">
+  console.log("Hello world")
+  function reply_click(id)
+  {
+    var msg = "Go to the Sessions Tab and with tutor code: " + id;
+    alert(msg);
+  }
+</script>>
+
 {% endblock %}
