@@ -41,6 +41,22 @@ on the filter function
     <script type="text/javascript">
       function reply_click(user_ID, user_info_phone, user_info_email, user_info_other1, user_info_other2)
       {
+        if(user_info_other2 == "" || user_info_other2 == null) {
+          user_info_other2 = "Option 2: Not provided by " + user_ID
+        }
+
+        if(user_info_other1 == "" || user_info_other1 == null) {
+          user_info_other1 = "Option 1: Not provided by " + user_ID
+        }
+
+        if(user_info_email == "" || user_info_email == null) {
+          user_info_email = "email : Not provided by " + user_ID
+        }
+
+        if(user_info_phone == "" || user_info_phone == null) {
+          user_info_phone = "phone : Not provided by " + user_ID
+        }
+
         var msg = user_ID + ": Contact information\n" + user_info_email + "\n" +
                   user_info_phone + "\n" + user_info_other1 + "\n" + user_info_other2;
         alert(msg);
