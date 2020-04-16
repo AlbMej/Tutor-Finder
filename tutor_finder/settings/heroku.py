@@ -4,7 +4,7 @@ DEBUG = False
 ADMINS = [('Alberto Mejia', 'albertomejia295@gmail.com')]
 
 # SDDTF_USER = config('SDDTF_USER') # Removed MongoDB, Only need dj_database_url()
-# SDDTF_PASS = config('SDDTF_PASS') # in base settings for Heroku Postgres 
+# SDDTF_PASS = config('SDDTF_PASS') # in base settings for Heroku Postgres
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -21,4 +21,4 @@ STATICFILES_DIRS = (
 )
 
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = ['sdd-tutor-finder.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['sdd-tutor-finder.herokuapp.com', '127.0.0.1', 'localhost', '192.168.1.179']
