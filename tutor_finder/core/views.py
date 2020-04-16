@@ -8,7 +8,7 @@ from django.http import HttpRequest, HttpResponse
 from django.urls import reverse
 from django.views.generic import FormView, TemplateView, ListView
 from django.contrib.auth.decorators import login_required
-from .forms import CustomFieldForm, TutorSearchForm, TutorSearchFilterForm
+from .forms import CustomFieldForm, TutorSearchForm, TutorSearchFilterForm, TutorListing, TutorListingForm
 from .models import Tutor, School, Course
 from urllib.parse import urlencode
 import datetime
@@ -52,9 +52,9 @@ class DeniedView(TemplateView):
 class PreapprovedView(TemplateView):
     template_name = 'preapproved.html'
 
-# If user is logged in 
+# If user is logged in
 # GET request renders empty Tutor Signup form
-# POST request saves valid form data to DB, verifies 
+# POST request saves valid form data to DB, verifies
 # a valid tutor signup, performs redirect as needed based on verification
 # If user is NOT logged in:
 # denies access, redirect to login
@@ -70,6 +70,25 @@ def submit_form(request):
 
     return render(request, "form.html", {
         'form': CustomFieldForm()
+    })
+
+# If user is logged in
+# GET request renders empty Tutor Listing form
+# POST request saves valid form data to DB
+# If user is NOT logged in:
+# denies access, redirect to login
+@login_required
+def create_listing(request):
+    form = TutorListingForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+
+    else:
+        form = TutorListingForm()
+
+    return render(request, "form.html", {
+        'form': TutorListingForm()
     })
 
 # renders tutor search form
@@ -102,7 +121,7 @@ class SearchView(TemplateView):
 # a POST request querys the DB given the search
 # term and given filters (if any) via the Django db/model API
 # renders given results in a list
-# A GET renders empty form  
+# A GET renders empty form
 
 class SearchResultsView(ListView):
     ### Applies search to DB given valid form data
@@ -120,9 +139,9 @@ class SearchResultsView(ListView):
         # this is where we query the db and return the list of tutor objects
         # we can figure out how to link the tutor results to actual pages later
         # prolly through some url nonsense, or a view/redirect href html thing
-        tutor_query = Tutor.objects.filter(course__name__icontains=class_search)
+        tutor_query = Tutor.objects.filter(course__icontains=class_search)
         if school != None:
-            tutor_query = tutor_query.filter(school__name__icontains=school)
+            tutor_query = tutor_query.filter(school__icontains=school)
         if max_price != None:
             tutor_query = tutor_query.filter(price__lte=max_price)
         return tutor_query

@@ -39,9 +39,6 @@ class UserInfo(models.Model):
     agreeMsg = "Do you agree to the terms and conditions listed below?"
     agree = models.BooleanField(agreeMsg)  #required=True
 
-
-
-
 class School(models.Model):
     name = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
@@ -57,9 +54,10 @@ class Course(models.Model):
 class Tutor(models.Model):
     name = models.CharField(max_length=225)
     price = models.IntegerField()
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, default = None)
-    school = models.ForeignKey(School, on_delete=models.CASCADE, default = None)
-    availability = []
+    course = models.CharField(max_length=64)
+    school = models.CharField(max_length=64)
+    #course = models.ForeignKey(Course, on_delete=models.CASCADE, default = None)
+    #school = models.ForeignKey(School, on_delete=models.CASCADE, default = None)
 
 
     def __str__(self):

@@ -12,10 +12,19 @@
         <ul>
             {% for tutor in tutors %}
               <li>
-                {{ tutor.name }}, {{ tutor.price }}
+                {{ tutor.name }}, ${{ tutor.price }}/hr
+                <button id="tutor_select" class="btn btn-primary" onClick="reply_click({{tutor.id}})">Connect with {{tutor.name}}</button>
               </li>
             {% endfor %}
           </ul>
 
     {% endif %}
+    <script type="text/javascript">
+      console.log("Hello world")
+      function reply_click(id)
+      {
+        var msg = id + ": Preferred contact method through chat room ";
+        alert(msg);
+      }
+    </script>
 {% endblock %}

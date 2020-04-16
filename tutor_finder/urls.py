@@ -23,6 +23,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('signup/', views.signup, name='signup'),
     path('submit_form', views.submit_form, name = 'tutorform'),
+    path('create_listing', views.create_listing, name = 'create_listing'),
     path('success/', views.SuccessView.as_view(), name='success'),
     path('denied/', views.DeniedView.as_view(), name='denied'),
     path('preapproved/', views.PreapprovedView.as_view(), name='preapproved'),
