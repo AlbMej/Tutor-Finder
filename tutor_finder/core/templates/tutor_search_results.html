@@ -15,22 +15,34 @@ on the filter function
     {% if not tutors.len == 0 %}
         <h2>{{ tutors.len }}</h2>
         <ul>
-            {% for tutor in tutors %}
-              <li>
-                <!-- Each tutor in the list will revieve their onw listing -->
-                {{ tutor.name }}, ${{ tutor.price }}/hr
-                <button id="tutor_select" class="btn btn-primary" onClick="reply_click({{tutor.id}})">Connect with {{tutor.name}}</button>
-              </li>
+            {% for user in users %}
+              {% for tutor in tutors %}
+                {% if tutor.user_ID == user.user_ID %}
+                  <li>
+                    <!-- Each tutor in the list will revieve their own listing -->
+                    {{ tutor.name }}, ${{ tutor.price }}/hr
+                    <button id="tutor_select" class="btn btn-primary"
+                    onClick="reply_click('{{tutor.user_ID}}',
+                    '{{user.email_TB}}', '{{user.phone_TB}}',
+                    '{{user.other_TB1}}', '{{user.other_TB2}}')">
+                    Connect with {{tutor.name}}</button>
+                  </li>
+                {% else %}
+                  <li>hello!</li>
+                {% endif %}
+              {% endfor %}
             {% endfor %}
-          </ul>
-
+        </ul>
+    {% else %}
+      <p>Sorry, but no results</p>
     {% endif %}
     <!-- javascript function onclick for connecting with tutor -->
     <!-- Default msg can change in the future, this is placeholder -->
     <script type="text/javascript">
-      function reply_click(id)
+      function reply_click(user_ID, user_info_phone, user_info_email, user_info_other1, user_info_other2)
       {
-        var msg = id + ": Preferred contact method through chat room ";
+        var msg = user_ID + ": Contact information\n" + user_info_email + "\n" +
+                  user_info_phone + "\n" + user_info_other1 + "\n" + user_info_other2;
         alert(msg);
       }
     </script>
