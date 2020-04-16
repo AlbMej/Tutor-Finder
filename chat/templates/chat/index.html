@@ -27,7 +27,7 @@
       };
 
       document.querySelector('#room-name-submit').onclick = function(e) {
-          var roomName = document.querySelector('#room-name-input').value.split(' ').join('_');
+          var roomName = document.querySelector('#room-name-input').value.split(' ').join('_').replace(/[\W]+/gi, "");
           window.location.pathname = '/chat/' + roomName + '/';
       };
 
