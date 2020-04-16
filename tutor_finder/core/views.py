@@ -156,8 +156,11 @@ class SearchResultsView(ListView):
         if max_price != None:
             tutor_query = tutor_query.filter(price__lte=max_price)
 
-        for tutor in tutor_query:
-            User_Info = UserInfo.objects.filter(user_ID__icontains=tutor.user_ID)
+        if(tutor_query.count() > 0):
+            for tutor in tutor_query:
+                User_Info = UserInfo.objects.filter(user_ID__icontains=tutor.user_ID)
+        else:
+            User_Info = []
         return (tutor_query, User_Info)
 
     ### Handles search form submission, validates submission data, Django parses
