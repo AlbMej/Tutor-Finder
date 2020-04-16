@@ -20,15 +20,15 @@ class UserInfo(models.Model):
     #TB = text box
     email_TB = models.EmailField("Email",
                         help_text="Please fill in at least 1 form of contact",
-                        default=None)
+                        default=None, blank=True)
     phone_TB = models.CharField("Phone Number", max_length=12,
                         help_text="Please fill in at least 1 form of contact",
-                        default=None)
+                        default=None, blank=True)
     other_TB1 = models.CharField("Other Contact Type", max_length=32,
                         help_text="Please fill in at least 1 form of contact",
-                        default = None)
+                        default = None, blank=True)
     other_TB2 = models.CharField("Other Contact Information", max_length=32,
-                                default=None)
+                                default=None, blank=True)
 
     #their school and level (FR/SO/JR/SR/G/PHD)
     school = models.CharField("College/University", max_length=32, default=None)
