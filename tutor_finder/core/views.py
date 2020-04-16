@@ -16,7 +16,7 @@ from django.urls import reverse
 from django.views.generic import FormView, TemplateView, ListView
 from django.contrib.auth.decorators import login_required
 from .forms import CustomFieldForm, TutorSearchForm, TutorSearchFilterForm, TutorListing, TutorListingForm
-from .models import Tutor, School, Course
+from .models import Tutor, School, Course, UserInfo
 from urllib.parse import urlencode
 import datetime
 
@@ -70,7 +70,9 @@ def submit_form(request):
     form = CustomFieldForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
-            form.save()
+            temp = form.save(commit=False)
+            temp.user_ID = request.user
+            temp.save()
 
     else:
         form = CustomFieldForm()
@@ -89,7 +91,9 @@ def create_listing(request):
     form = TutorListingForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
-            form.save()
+            temp = form.save(commit=False)
+            temp.user_ID = request.user
+            temp.save()
 
     else:
         form = TutorListingForm()
@@ -151,7 +155,10 @@ class SearchResultsView(ListView):
             tutor_query = tutor_query.filter(school__icontains=school)
         if max_price != None:
             tutor_query = tutor_query.filter(price__lte=max_price)
-        return tutor_query
+
+        for tutor in tutor_query:
+            User_Info = UserInfo.objects.filter(user_ID__icontains=tutor.user_ID)
+        return (tutor_query, User_Info)
 
     ### Handles search form submission, validates submission data, Django parses
     ### into a neatly made list, submitted to query function
@@ -161,14 +168,15 @@ class SearchResultsView(ListView):
         html = 'tutor_search_results.html'
         if request.method == 'POST':
             if form.is_valid():
-                tutors = SearchResultsView.tut_search(form, 'POST')
+                (tutors, users) = SearchResultsView.tut_search(form, 'POST')
         else:
             form = TutorSearchForm(request.GET)
             if form.is_valid():
-                tutors = SearchResultsView.tut_search(form,'GET')
+                (tutors, users) = SearchResultsView.tut_search(form,'GET')
             form = TutorSearchFilterForm(request.GET)
 
         return render( request, html ,{
             'form': form,
-            'tutors' : tutors
+            'tutors' : tutors,
+            'users' : users
             })

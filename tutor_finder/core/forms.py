@@ -4,7 +4,7 @@ Description
 This file contains the python
 backend for every form with the webapp.
 Forms are the most common way of getting
-user input from the User Interface and 
+user input from the User Interface and
 processing it into a database table
 '''
 

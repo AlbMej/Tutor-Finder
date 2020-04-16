@@ -32,6 +32,7 @@ class UserInfo(models.Model):
     #first and last name
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
+    user_ID = models.CharField(max_length=128, default = None)
 
     #contact information
     #TB = text box
@@ -73,6 +74,7 @@ class Tutor(models.Model):
     price = models.IntegerField()
     course = models.CharField(max_length=64, default = None)
     school = models.CharField(max_length=64, default = None)
+    user_ID = models.CharField(max_length=128, default = None)
     #course = models.ForeignKey(Course, on_delete=models.CASCADE, default = None)
     #school = models.ForeignKey(School, on_delete=models.CASCADE, default = None)
 
