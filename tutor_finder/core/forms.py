@@ -161,7 +161,7 @@ class TutorListing(forms.ModelForm):
         #for the text inputs, placeholder refers to example text in light gray
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'Perferred name'}),
-            'price': forms.TextInput(attrs={'placeholder': 'Ex. 15 (this is $/hr)'}),
+            'price': forms.NumberInput(attrs={'placeholder': 'Ex. 15 (this is $/hr)'}),
             'course': forms.TextInput(attrs={'placeholder': 'Ex. Software Design and Documentation'}),
             'school': forms.TextInput(attrs={'placeholder': 'Ex. RPI'})
         }
