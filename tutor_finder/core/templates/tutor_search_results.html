@@ -21,7 +21,7 @@ on the filter function
                 {% if tutor.user_ID == user.user_ID %}
                   <li>
                     <!-- Each tutor in the list will revieve their own listing -->
-                    {{ tutor.name }}, ${{ tutor.price }}/hr
+                    {{ tutor.name }}, tutors {{tutor.course}} for ${{ tutor.price }}/hr
                     <button id="tutor_select" class="btn btn-primary"
                     onClick="reply_click('{{tutor.user_ID}}',
                     '{{user.phone_TB}}', '{{user.email_TB}}',

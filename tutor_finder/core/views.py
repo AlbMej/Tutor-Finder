@@ -164,7 +164,8 @@ class SearchResultsView(ListView):
         Tutor_IDs = []
         if(tutor_query.count() > 0):
             for tutor in tutor_query:
-                Tutor_IDs.append(tutor.user_ID)
+                if(tutor.user_ID not in Tutor_IDs):
+                    Tutor_IDs.append(tutor.user_ID)
             tutorFilter = Q()
             for tutor in Tutor_IDs:
                 tutorFilter = tutorFilter | Q(user_ID=tutor)
