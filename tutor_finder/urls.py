@@ -36,5 +36,6 @@ urlpatterns = [
     path('tutor_search_results/', views.SearchResultsView.search_results, name = 'tutor_search_results'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    path('chat/', include('chat.urls'))
+    path('chat/', include('chat.urls')),
+    path('rate/', views.rating_endpoint, name = 'rate')
 ]

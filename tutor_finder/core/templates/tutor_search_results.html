@@ -20,12 +20,13 @@ on the filter function
                 {% if tutor.user_ID == user.user_ID %}
                   <li>
                     <!-- Each tutor in the list will revieve their own listing -->
-                    {{ tutor.name }}, ${{ tutor.price }}/hr
+                    {{ tutor.name }}, ${{ tutor.price }}/hr, {{tutor.calculate_rating}}
                     <button id="tutor_select" class="btn btn-primary"
                     onClick="reply_click('{{tutor.user_ID}}',
                     '{{user.email_TB}}', '{{user.phone_TB}}',
                     '{{user.other_TB1}}', '{{user.other_TB2}}')">
                     Connect with {{tutor.name}}</button>
+                    <button id="rate_select" class="btn btn-warning" onClick="test('{{tutor.pk}}, 4')">Rate {{tutor.name}}</button>
                   </li>
                 {% else %}
                   <li>hello!</li>
@@ -60,6 +61,15 @@ on the filter function
         var msg = user_ID + ": Contact information\n" + user_info_email + "\n" +
                   user_info_phone + "\n" + user_info_other1 + "\n" + user_info_other2;
         alert(msg);
+      }
+
+      function test(pk, rating){
+        console.log("hit")
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        var theUrl = "/rate";
+        xmlhttp.open("POST", theUrl);
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.send(JSON.stringify({ "pk": pk, "response": { "rate": rating } }));
       }
     </script>
 {% endblock %}

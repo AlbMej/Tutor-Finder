@@ -75,9 +75,20 @@ class Tutor(models.Model):
     course = models.CharField(max_length=64, default = None)
     school = models.CharField(max_length=64, default = None)
     user_ID = models.CharField(max_length=128, default = None)
+    review_count = models.IntegerField(default = 0)
+    review_score = models.IntegerField(default = 0)
+
+    def calculate_rating(self):
+        if self.review_count != 0:
+            return self.review_score / self.review_count
+        return "No reviews"
     #course = models.ForeignKey(Course, on_delete=models.CASCADE, default = None)
     #school = models.ForeignKey(School, on_delete=models.CASCADE, default = None)
 
+class Ratings(models.Model):
+    score = models.IntegerField()
+    comment = models.CharField(max_length=225)
+    tutor_id = models.ForeignKey(Tutor, on_delete=models.CASCADE, default = None)
 
     def __str__(self):
         return self.name
