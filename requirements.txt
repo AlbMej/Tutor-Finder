@@ -16,4 +16,4 @@ Unipath
 python-dateutil
 dnspython
 sqlparse==0.2.4
-django-lint
+pylint-django
