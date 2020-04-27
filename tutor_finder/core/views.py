@@ -171,10 +171,16 @@ class SearchResultsView(ListView):
             tutor_query = tutor_query.filter(school__icontains=school)
         if max_price != None:
             tutor_query = tutor_query.filter(price__lte=max_price)
-
+        User_Info = []
+        Tutor_IDs = []
         if(tutor_query.count() > 0):
             for tutor in tutor_query:
-                User_Info = UserInfo.objects.filter(user_ID__icontains=tutor.user_ID)
+                if(tutor.user_ID not in Tutor_IDs):
+                    Tutor_IDs.append(tutor.user_ID)
+            tutorFilter = Q()
+            for tutor in Tutor_IDs:
+                tutorFilter = tutorFilter | Q(user_ID=tutor)
+            User_Info = UserInfo.objects.filter(tutorFilter)
         else:
             User_Info = []
         return (tutor_query, User_Info)
