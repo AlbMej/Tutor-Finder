@@ -104,8 +104,11 @@ def create_listing(request):
     denies access, redirect to login
     '''
     form = TutorListingForm(request.POST)
+
     if request.method == 'POST':
+
         if form.is_valid():
+
             temp = form.save(commit=False)
             temp.user_ID = request.user
             temp.save()
@@ -113,9 +116,10 @@ def create_listing(request):
     else:
         form = TutorListingForm()
 
-    return render(request, "form.html", {
-        'form': TutorListingForm()
-    })
+    return render( request, "form.html" , {
+        'form' : TutorListingForm()
+        }
+    )
 
 class ReviewView(TemplateView):
     '''
@@ -173,21 +177,28 @@ class SearchResultsView(ListView):
         max_price = None
         lowest_rating = None
         school = None
+        start_t = None
+
         if method == 'POST':
-            time_av = query_set.cleaned_data['time']
             max_price = query_set.cleaned_data['max_price']
             lowest_rating = query_set.cleaned_data['lowest_rating']
             school = query_set.cleaned_data['school']
+            start_t = query_set.cleaned_data['time']
+
         # this is where we query the db and return the list of tutor objects
         # we can figure out how to link the tutor results to actual pages later
         # prolly through some url nonsense, or a view/redirect href html thing
         tutor_query = Tutor.objects.filter(course__icontains=class_search)
+
         if school != None:
             tutor_query = tutor_query.filter(school__icontains=school)
         if max_price != None:
             tutor_query = tutor_query.filter(price__lte=max_price)
-        User_Info = []
-        Tutor_IDs = []
+
+        if start_t != None:
+            tutor_query = tutor_query.filter(start__lte=start_t)
+            tutor_query = tutor_query.filter(end__gte=start_t)
+
         if tutor_query.count() > 0:
             for tutor in tutor_query:
                 if tutor.user_ID not in Tutor_IDs:
@@ -209,10 +220,13 @@ class SearchResultsView(ListView):
         form = TutorSearchFilterForm(request.POST)
         html = 'tutor_search_results.html'
         if request.method == 'POST':
+
             if form.is_valid():
                 (tutors, users) = SearchResultsView.tut_search(form, 'POST')
+
         else:
             form = TutorSearchForm(request.GET)
+
             if form.is_valid():
                 (tutors, users) = SearchResultsView.tut_search(form, 'GET')
             form = TutorSearchFilterForm(request.GET)

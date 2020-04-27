@@ -57,7 +57,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'bootstrap4',
     'crispy_forms',
-    'chat'
+    'chat',
+
+
 ]
 
 MIDDLEWARE = [

@@ -6,11 +6,11 @@ on the filter function
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-
 {% block content %}
     <h1>Search Results</h1>
 
     {% crispy form %}
+
 
     {% if tutors|length != 0 %}
         <br>

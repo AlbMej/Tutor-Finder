@@ -16,6 +16,8 @@ if an active session exists
 '''
 
 from django.db import models
+import datetime
+import django.utils
 
 class UserInfo(models.Model):
     '''This model is for the user information of a tutor'''
@@ -75,9 +77,12 @@ class Tutor(models.Model):
     '''This model is for information about a tutor listing to be stored in the database'''
     name = models.CharField(max_length=225)
     price = models.IntegerField()
-    course = models.CharField(max_length=64, default=None)
-    school = models.CharField(max_length=64, default=None)
-    user_ID = models.CharField(max_length=128, default=None)
+    course = models.CharField(max_length=64, default = None)
+    school = models.CharField(max_length=64, default = None)
+    user_ID = models.CharField(max_length=128, default = None)
+    start = models.DateField(default = None)
+    end = models.DateField(default = None)
+
     review_count = models.IntegerField(default=0)
     review_score = models.IntegerField(default=0)
 
@@ -87,6 +92,7 @@ class Tutor(models.Model):
         if self.review_count != 0:
             return self.review_score / self.review_count
         return "No reviews"
+
     #course = models.ForeignKey(Course, on_delete=models.CASCADE, default = None)
     #school = models.ForeignKey(School, on_delete=models.CASCADE, default = None)
 
