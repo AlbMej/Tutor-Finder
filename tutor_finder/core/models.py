@@ -16,6 +16,8 @@ if an active session exists
 '''
 
 from django.db import models
+import datetime
+import django.utils
 
 # Create your models here.
 class UserInfo(models.Model):
@@ -75,6 +77,8 @@ class Tutor(models.Model):
     course = models.CharField(max_length=64, default = None)
     school = models.CharField(max_length=64, default = None)
     user_ID = models.CharField(max_length=128, default = None)
+    start = models.DateTimeField(default = None)
+    end = models.DateTimeField(default = None)
     #course = models.ForeignKey(Course, on_delete=models.CASCADE, default = None)
     #school = models.ForeignKey(School, on_delete=models.CASCADE, default = None)
 
