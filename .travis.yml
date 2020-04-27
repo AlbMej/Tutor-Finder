@@ -26,8 +26,7 @@ script: # command to run tests
   - python manage.py makemigrations
   - python manage.py migrate
   - python manage.py runserver &
-  - touch lintOut.txt
-  - pylint-django tutor_finder/ | lintOut.txt
+  - pylint --load-plugins pylint_django tutor_finder/ > lintOut.txt
   - cat lintOut.txt
 
 after_script:
