@@ -32,6 +32,9 @@ def home(request):
     })
 
 
+def rating_endpoint(request):
+    print(request.method)
+
 # Render signup page
 # POST HTTP request fills form with valid
 # data, saves to db via django model/db access API
@@ -106,6 +109,14 @@ def create_listing(request):
     return render(request, "form.html", {
         'form': TutorListingForm()
     })
+
+class ReviewView(TemplateView):
+    template_name = 'ratings_modal.html'
+
+    def submit_rating(request):
+        if request.method == 'POST':
+            if form.is_valid():
+                print("success rating")
 
 # renders tutor search form
 # only responsible for rendering the single search bar
