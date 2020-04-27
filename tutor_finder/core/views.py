@@ -185,10 +185,8 @@ class SearchResultsView(ListView):
     ### into a neatly made list, submitted to query function
     def search_results(request):
         tutors = None
-        print(request)
         form = TutorSearchFilterForm(request.POST)
         html = 'tutor_search_results.html'
-        print(form.data)
         if request.method == 'POST':
 
             if form.is_valid():
