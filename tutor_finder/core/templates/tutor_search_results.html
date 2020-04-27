@@ -3,19 +3,15 @@ This file displays the tutors for tutor search based
 on the filter function
 -->
 
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% load bootstrap4 %}
-{% bootstrap_css %}         
-{% bootstrap_javascript jquery='full' %}  
-
 
 {% block content %}
     <h1>Search Results</h1>
 
     {% crispy form %}
 
-    
+
 
     {% if not tutors.len == 0 %}
         <h2>{{ tutors.len }}</h2>

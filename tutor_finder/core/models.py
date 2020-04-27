@@ -77,8 +77,8 @@ class Tutor(models.Model):
     course = models.CharField(max_length=64, default = None)
     school = models.CharField(max_length=64, default = None)
     user_ID = models.CharField(max_length=128, default = None)
-    start = models.DateTimeField(default = None)
-    end = models.DateTimeField(default = None)
+    start = models.DateField(default = None)
+    end = models.DateField(default = None)
     #course = models.ForeignKey(Course, on_delete=models.CASCADE, default = None)
     #school = models.ForeignKey(School, on_delete=models.CASCADE, default = None)
 

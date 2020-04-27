@@ -56,18 +56,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'bootstrap4',
-    'bootstrap_datepicker_plus',
     'crispy_forms',
     'chat',
-    
+
 
 ]
-BOOTSTRAP3 = {
-    'include_jquery': True,
-}
-BOOTSTRAP4 = {
-    'include_jquery': True,
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
