@@ -4,6 +4,7 @@ Tutor Finder is a web app which allows students to find tutors for classes as we
 
 ## Setup
 Make sure to have Python3 & venv installed.
+Note that everything uses python3, if that is not your default version of python use *python3* in place of python and *pip3* in place of pip.
 Reference: https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
 
 1. Create the virtual enviroment (as explained in link above)
@@ -12,13 +13,13 @@ Reference: https://packaging.python.org/guides/installing-using-pip-and-virtual-
 
 ### Setting up .env
 
-Tutor Finder expects the following variables to exist within the environment.  
+Tutor Finder expects the following variables to exist within the environment:  
 SECRET_KEY  
 
-A example .env file could look like  
-'''  
-SECRET_KEY='yOuR_sEcReCt_KeY'  
-'''  
+Create a file titled *.env* and save at the top level (Tutor-Finder folder).
+
+A example/testing .env file could look like  
+`SECRET_KEY='yOuR_sEcReCt_KeY'`
 
 ## Database Setup/Reset
 
@@ -29,8 +30,9 @@ You don't want to have your code work locally with SQLite, but fail in productio
 1. Command for Ubuntu to install postgresql: `sudo apt-get install postgresql`
 2. Use the OS user postgres to create the database, enter: `sudo -u postgres -i` (opens another terminal)
 3. Create a database named test_db by the user postgres: `psql -c 'create database test_db;' -U postgres`
-4. python manage.py makemigrations
-5. python manage.py migrate
+4. Exit the postgres terminal (CTRL+D).
+4. Run `python manage.py makemigrations`
+5. Run `python manage.py migrate`
 
 ## Docker for chat
 
