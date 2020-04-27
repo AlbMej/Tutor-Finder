@@ -1,6 +1,7 @@
-# chat/urls.py
-#copy/pasted from: https://channels.readthedocs.io/en/latest/tutorial/part_1.html
-#& https://channels.readthedocs.io/en/latest/tutorial/part_1.html
+'''chat/urls.py
+adapted from: https://channels.readthedocs.io/en/latest/tutorial/part_1.html
+and https://channels.readthedocs.io/en/latest/tutorial/part_1.html
+this where the urls for the chat rooms are stored'''
 from django.urls import path
 
 from . import views

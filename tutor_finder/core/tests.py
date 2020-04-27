@@ -6,6 +6,7 @@ At the moment our test plans have been
 largely manual testing.
 '''
 
-from django.test import TestCase
+#Never used, we use our own testing software (travis CI) and systems
+#from django.test import TestCase
 
 # Create your tests here.
