@@ -20,22 +20,24 @@ for adding a new page to the webapp
 """
 from django.contrib import admin
 from django.urls import path, include
+#caught as a reimport
+#from django.conf.urls import include
 from tutor_finder.core import views
-from django.conf.urls import include
 
 
 urlpatterns = [
     path('', views.home, name='home'),
     path('signup/', views.signup, name='signup'),
-    path('submit_form', views.submit_form, name = 'tutorform'),
-    path('create_listing', views.create_listing, name = 'create_listing'),
+    path('submit_form', views.submit_form, name='tutorform'),
+    path('create_listing', views.create_listing, name='create_listing'),
     path('success/', views.SuccessView.as_view(), name='success'),
     path('denied/', views.DeniedView.as_view(), name='denied'),
     path('preapproved/', views.PreapprovedView.as_view(), name='preapproved'),
-    path('tutor_search/', views.SearchView.search_form, name = 'tutor_search'),
-    path('tutor_search_results/', views.SearchResultsView.search_results, name = 'tutor_search_results'),
+    path('tutor_search/', views.SearchView.search_form, name='tutor_search'),
+    path('tutor_search_results/', views.SearchResultsView.search_results,
+         name='tutor_search_results'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('chat/', include('chat.urls')),
-    path('rate/', views.rating_endpoint, name = 'rate')
+    path('rate/', views.rating_endpoint, name='rate')
 ]
