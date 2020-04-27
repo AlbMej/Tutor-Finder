@@ -26,7 +26,9 @@ script: # command to run tests
   - python manage.py makemigrations
   - python manage.py migrate
   - python manage.py runserver &
-  - pylint-django tutor_finder/
+  - touch lintOut.txt
+  - pylint-django tutor_finder/ | lintOut.txt
+  - cat lintOut.txt
 
 after_script:
   - echo "Kill script in 5s..."
