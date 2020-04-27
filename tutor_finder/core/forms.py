@@ -59,7 +59,7 @@ class InfoFieldForm(forms.ModelForm):
             'email_TB': forms.TextInput(attrs={'placeholder': 'Ex. john.doe@example.com'}),
             'other_TB1': forms.TextInput(attrs={'placeholder': 'Ex. Twitter'}),
             'other_TB2': forms.TextInput(attrs={'placeholder': 'Ex. @JohnDoe'}),
-            'school': forms.TextInput(attrs={'placeholder': 'Ex. RPI'})
+            'school': forms.TextInput(attrs={'placeholder': 'Full Name Ex. Rensselaer Polytechnic Institute'})
         }
 
 class CustomCheckbox(Field):
@@ -192,7 +192,7 @@ class TutorListing(forms.ModelForm):
             'name': forms.TextInput(attrs={'placeholder': 'Perferred name'}),
             'price': forms.NumberInput(attrs={'placeholder': 'Ex. 15 (this is $/hr)'}),
             'course': forms.TextInput(attrs={'placeholder': 'Ex. Software Design and Documentation'}),
-            'school': forms.TextInput(attrs={'placeholder': 'Ex. RPI'})
+            'school': forms.TextInput(attrs={'placeholder': 'Full Name Ex. Rensselaer Polytechnic Institute'})
         }
 
 #this class goes with the "TutorListing" above
