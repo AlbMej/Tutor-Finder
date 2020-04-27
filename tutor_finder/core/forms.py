@@ -15,6 +15,7 @@ from crispy_forms.layout import Layout, Submit, Row, Column, Field
 from django.core.exceptions import ValidationError
 from tutor_finder.core.models import UserInfo
 from tutor_finder.core.models import Tutor
+from tutor_finder.core.models import Ratings
 import datetime
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -58,7 +59,7 @@ class InfoFieldForm(forms.ModelForm):
             'email_TB': forms.TextInput(attrs={'placeholder': 'Ex. john.doe@example.com'}),
             'other_TB1': forms.TextInput(attrs={'placeholder': 'Ex. Twitter'}),
             'other_TB2': forms.TextInput(attrs={'placeholder': 'Ex. @JohnDoe'}),
-            'school': forms.TextInput(attrs={'placeholder': 'Ex. RPI'})
+            'school': forms.TextInput(attrs={'placeholder': 'Full Name Ex. Rensselaer Polytechnic Institute'})
         }
 
 class CustomCheckbox(Field):
@@ -121,6 +122,34 @@ class TutorSearchForm(forms.Form):
         )
 
 
+class RatingForm(forms.Form):
+    class Meta:
+        model = Ratings
+
+        fields = ('score', 'comment', 'tutor_id')
+
+        #for the text inputs, placeholder refers to example text in light gray
+        widgets = {
+            'score': forms.NumberInput(attrs={'placeholder': '4'}),
+            'comment': forms.TextInput(attrs={'placeholder': 'excellent with explaing the homework'}),
+            'tutor_id': forms.NumberInput(attrs={'placeholder': 'This needs to be automatic'}),
+        }
+
+#this class goes with the "TutorListing" above
+class RatingFormLayout(RatingForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        #the layout, row by row
+        self.helper.layout = Layout(
+            Row(
+                Column('score', css_class='form-group col-md-4 mb-0'),
+                Column('comment', css_class='form-group col-md-4 mb-0'),
+                Column('tutor_id', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Submit('submit', 'Submit')
+        )
 
 # form to display/capture search filter user filled data
 # inherents from TutorSearchForm in order to bring along the
@@ -163,7 +192,7 @@ class TutorListing(forms.ModelForm):
             'name': forms.TextInput(attrs={'placeholder': 'Perferred name'}),
             'price': forms.NumberInput(attrs={'placeholder': 'Ex. 15 (this is $/hr)'}),
             'course': forms.TextInput(attrs={'placeholder': 'Ex. Software Design and Documentation'}),
-            'school': forms.TextInput(attrs={'placeholder': 'Ex. RPI'})
+            'school': forms.TextInput(attrs={'placeholder': 'Full Name Ex. Rensselaer Polytechnic Institute'})
         }
 
 #this class goes with the "TutorListing" above
