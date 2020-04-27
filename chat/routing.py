@@ -1,7 +1,6 @@
-# chat/routing.py
-#copy/pasted from: https://channels.readthedocs.io/en/latest/tutorial/part_2.html
+'''chat/routing.py
+adapted from from: https://channels.readthedocs.io/en/latest/tutorial/part_2.html'''
 from django.urls import re_path
-
 from . import consumers
 
 websocket_urlpatterns = [
