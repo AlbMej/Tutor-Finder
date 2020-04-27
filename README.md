@@ -2,6 +2,12 @@
 
 Tutor Finder is a web app which allows students to find tutors for classes as well as register and make money as a tutor.
 
+## NOTE: This has been tested on Ubuntu and macOS. This will likely work on WSL for certain versions of Windows 10, except for the chat feature. The chat feature requires Docker which does not work on all Windows 10 editions. Therefore, we only officialy support recent versions of Ubuntu and macOS; please use those platforms for running the server.
+
+## Once running on a server, should be able to access in both the Chrome and Firefox web browsers.
+
+## Directions to run a server hosting the Tutor Finder website.
+
 ## Setup
 Make sure to have Python3 & venv installed.
 Note that everything uses python3, if that is not your default version of python use *python3* in place of python and *pip3* in place of pip.
@@ -18,7 +24,7 @@ SECRET_KEY
 
 Create a file titled *.env* and save at the top level (Tutor-Finder folder).
 
-A example/testing .env file could look like  
+An example/testing .env file could look like  
 `SECRET_KEY='yOuR_sEcReCt_KeY'`
 
 ## Database Setup/Reset
