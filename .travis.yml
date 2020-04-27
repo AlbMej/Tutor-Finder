@@ -26,6 +26,7 @@ script: # command to run tests
   - python manage.py makemigrations
   - python manage.py migrate
   - python manage.py runserver &
+  - django-lint tutor_finder/
 
 after_script:
   - echo "Kill script in 5s..."
