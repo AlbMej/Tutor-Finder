@@ -13,6 +13,20 @@ Make sure to have Python3 & venv installed.
 Note that everything uses python3, if that is not your default version of python use *python3* in place of python and *pip3* in place of pip.
 Reference: https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
 
+### Automated Build - Alternative to the below
+## NOTE: This has only been tested on Ubuntu. If this fails, we recommend trying the manual install instead. If the docker step gives an installation error, look at the docker section of the manual setup for installation instructions. If you get an error about the port for docker already being in use, try restarting your computer.
+
+1. Create the virtual environment (as explained in the above link)
+2. Activate the environment as described above i.e. ```source <your-env-name>/bin/activate```
+3. In your venv, run command ```pip install doit import_deps```
+4. While at the base directory of the project, the same level as the dodo.py file, run ```doit```. This will handle all setups and deploy the server to localhost:8000.
+5. While running doit you may be prompted for input from the doit system, this is all required as part of the setup. After 'static' appears on the cl, input 'yes'.
+Next, the superuser task willl require input, after superuser is displayed, enter a desired username, valid email, and password (if it gives a password error, enter 'y').
+6. The server should now be running, access the host via your preffered browser that is supported.
+
+### Manual Setup
+
+
 1. Create the virtual enviroment (as explained in link above)
 2. Activate the enviroment (as explained in link above)
 3. Install the dependencies via `pip install -r requirements.txt`
@@ -42,7 +56,9 @@ You don't want to have your code work locally with SQLite, but fail in productio
 
 ## Docker for chat
 
+You may need to install docker to do this; the command is: `sudo apt install docker.io`
 To use the chat feature, you need a docker running. In Ubuntu, this command should do the trick: `sudo docker run -p 6379:6379 -d redis:5`
+If you get an error about the port for docker already being in use, try restarting your computer.
 
 ## Launching the server
 1. python manage.py runserver

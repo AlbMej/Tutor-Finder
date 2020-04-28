@@ -9,13 +9,12 @@ processing it into a database table
 '''
 
 
-import datetime
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, Field
-#from django.core.exceptions import ValidationError   unused import
+
 from tutor_finder.core.models import UserInfo
 from tutor_finder.core.models import Tutor
 from tutor_finder.core.models import Ratings
@@ -111,6 +110,8 @@ class CustomFieldForm(InfoFieldForm):
         )
 
 
+# form to display tutor search bar, used to
+# validate data, and foward to search results/filters
 class TutorSearchForm(forms.Form):
     '''form to display tutor search bar, used to
     validate data, and foward to search results/filters'''
@@ -162,8 +163,15 @@ class TutorSearchFilterForm(TutorSearchForm):
     inherents from TutorSearchForm in order to bring along the
     general search bar and to provide the filtered form with
     access to the general search term'''
-
-    time = forms.DateTimeField(initial=datetime.datetime.today, required=False)
+    # date_A = forms.DateField(widget=DatePickerInput())
+    # date_B = forms.DateTimeField(widget=DateTimePicker())
+    time = forms.CharField(
+        widget=forms.DateTimeInput(
+            attrs={'type' : 'date'}
+        ),
+        required=False,
+        empty_value=None
+    )
     max_price = forms.DecimalField(required=False)
     lowest_rating = forms.DecimalField(initial=0.0, required=False)
     school = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'School'}),
@@ -181,7 +189,7 @@ class TutorSearchFilterForm(TutorSearchForm):
             ),
             Row(
                 Column('max_price', css_class='form-group col-md-6 mb-0'),
-                Column('lowest_rating', css_class='form-group col-md-6 mb-0'),
+                #Column('lowest_rating', css_class='form-group col-md-6 mb-0'),
                 css_class='form_row'
             ),
             Submit('submit', 'Apply Filters')
@@ -194,7 +202,7 @@ class TutorListing(forms.ModelForm):
         '''tells the form what model to user from models.py'''
         model = Tutor
 
-        fields = ('name', 'price', 'course', 'school')
+        fields = ('name', 'price', 'course', 'school', 'start', 'end')
 
         #for the text inputs, placeholder refers to example text in light gray
         fullName = 'Full Name Ex. Rensselaer Polytechnic Institute'
@@ -202,6 +210,8 @@ class TutorListing(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'Perferred name'}),
             'price': forms.NumberInput(attrs={'placeholder': 'Ex. 15 (this is $/hr)'}),
+            'start' : forms.DateTimeInput(attrs={'type' : 'date'}),
+            'end' : forms.DateTimeInput(attrs={'type' : 'date'}),
             'course': forms.TextInput(attrs={'placeholder': courseHelper}),
             'school': forms.TextInput(attrs={'placeholder': fullName})
         }
@@ -225,5 +235,10 @@ class TutorListingForm(TutorListing):
                 Column('course', css_class='form-group col-md-12 mb-0'),
                 css_class='form-row'
             ),
+            Row(
+                'start',
+                'end'
+            ),
+
             Submit('submit', 'Submit')
         )
