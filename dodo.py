@@ -18,8 +18,7 @@ def task_export_env_vars():
             pass
 
     return {
-        'actions' : [set_env_vars],
-        'file_dep' : [".env"]
+        'actions' : [set_env_vars]
     }
 
 def task_db_install():
