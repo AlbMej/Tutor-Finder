@@ -6,22 +6,22 @@ on the filter function
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-
 {% block content %}
     <h1>Search Results</h1>
 
     {% crispy form %}
 
+
     {% if tutors|length != 0 %}
         <br>
-        <h2>We found {{ tutors|length }} tutors</h2>
+        <h2>We found {{ tutors|length }} tutor(s)</h2>
         <ul>
             {% for user in users %}
               {% for tutor in tutors %}
                 {% if tutor.user_ID == user.user_ID %}
                   <li>
                     <!-- Each tutor in the list will revieve their own listing -->
-                    {{ tutor.name }}, tutors {{tutor.course}} for ${{ tutor.price }}/hr, {{tutor.calculate_rating}}
+                    {{ tutor.name }}, tutors {{tutor.course}} for ${{ tutor.price }}/hr
                     <button id="tutor_select" class="btn btn-primary"
                     onClick="reply_click('{{tutor.user_ID}}',
                     '{{user.phone_TB}}', '{{user.email_TB}}',
@@ -79,7 +79,7 @@ on the filter function
 
       function test(pk, rating){
         console.log("hit")
-        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
         var theUrl = "/rate";
         xmlhttp.open("POST", theUrl);
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");

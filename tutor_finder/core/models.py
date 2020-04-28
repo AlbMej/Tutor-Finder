@@ -54,7 +54,7 @@ class UserInfo(models.Model):
                              default=None)
 
     #terms and conditions that have yet to be written
-    agreeMsg = "Do you agree to the terms and conditions listed below?"
+    agreeMsg = "I agree to obey the academic integrity policies of all schools involved"
     agree = models.BooleanField(agreeMsg)  #required=True
 
 class School(models.Model):
@@ -78,6 +78,9 @@ class Tutor(models.Model):
     course = models.CharField(max_length=64, default=None)
     school = models.CharField(max_length=64, default=None)
     user_ID = models.CharField(max_length=128, default=None)
+    start = models.DateField(default=None)
+    end = models.DateField(default=None)
+
     review_count = models.IntegerField(default=0)
     review_score = models.IntegerField(default=0)
 
@@ -87,6 +90,7 @@ class Tutor(models.Model):
         if self.review_count != 0:
             return self.review_score / self.review_count
         return "No reviews"
+
     #course = models.ForeignKey(Course, on_delete=models.CASCADE, default = None)
     #school = models.ForeignKey(School, on_delete=models.CASCADE, default = None)
 
