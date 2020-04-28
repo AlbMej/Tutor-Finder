@@ -16,6 +16,8 @@ if an active session exists
 '''
 
 from django.db import models
+import datetime
+import django.utils
 
 class UserInfo(models.Model):
     '''This model is for the user information of a tutor'''

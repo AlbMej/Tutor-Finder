@@ -13,6 +13,19 @@ Make sure to have Python3 & venv installed.
 Note that everything uses python3, if that is not your default version of python use *python3* in place of python and *pip3* in place of pip.
 Reference: https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
 
+### Automated Build - Alternative to the below
+
+1. Create the virtual environment (as explained in the above link)
+2. Activate the environment as described above i.e. ```source <your-env-name>/bin/activate```
+3. In your venv, run command ```pip install doit import_deps```
+4. While at the base directory of the project, the same level as the dodo.py file, run ```doit```. This will handle all setups and deploy the server to localhost:8000.
+5. While running doit you may be prompted for input from the doit system, this is all required as part of the setup. After 'static' appears on the cl, input 'yes'.
+Next, the superuser task willl require input, after superuser is displayed, enter a desired username, valid email, and password (if it gives a password error, enter 'y').
+6. The server should now be running, access the host via your preffered browser that is supported.
+
+### Manual Setup
+
+
 1. Create the virtual enviroment (as explained in link above)
 2. Activate the enviroment (as explained in link above)
 3. Install the dependencies via `pip install -r requirements.txt`

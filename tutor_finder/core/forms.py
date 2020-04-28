@@ -194,7 +194,7 @@ class TutorListing(forms.ModelForm):
         '''tells the form what model to user from models.py'''
         model = Tutor
 
-        fields = ('name', 'price', 'course', 'school')
+        fields = ('name', 'price', 'course', 'school' , 'start', 'end')
 
         #for the text inputs, placeholder refers to example text in light gray
         fullName = 'Full Name Ex. Rensselaer Polytechnic Institute'
@@ -225,5 +225,10 @@ class TutorListingForm(TutorListing):
                 Column('course', css_class='form-group col-md-12 mb-0'),
                 css_class='form-row'
             ),
+            Row(
+                'start',
+                'end'
+            ),
+            
             Submit('submit', 'Submit')
         )
