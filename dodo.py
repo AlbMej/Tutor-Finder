@@ -25,7 +25,7 @@ def task_db_install():
     """Installing postgreSQL dependencies"""
     def create_db():
         try:
-            stream = subprocess.call(['createdb', 'test_db', '-U postgres'],shell=True)
+            stream = subprocess.call(['createdb', 'test_db', '-U', 'postgres'])
             
         except:
             print('failure')
